@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/shared/colors.dart';
 
 Duration defaultDuration = const Duration(milliseconds: 180);
 AppBar invoiceBuildAppBar(
-    {required String title, required List<Widget> actions, required bool showBackButton}) {
+    {required String title,
+    required List<Widget> actions,
+    required bool showBackButton,
+    double? elevation,
+    SystemUiOverlayStyle? sysUiBar}) {
   return AppBar(
-    elevation: .5,
+    elevation: elevation ?? .5,
     backgroundColor: AppColors.cWhite,
     leading: showBackButton
         ? Bounce(
@@ -31,6 +36,7 @@ AppBar invoiceBuildAppBar(
         fontWeight: FontWeight.w700,
       ),
     ),
+    systemOverlayStyle: sysUiBar,
     actions: [
       Padding(
         padding: const EdgeInsets.only(right: 10),

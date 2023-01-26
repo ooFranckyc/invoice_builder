@@ -17,7 +17,7 @@ class PdfInvoiceGenApi {
     final invoicesData = [...invoice.items.map((e) => e.toList()).toList()];
     final pdf = Document();
     pdf.addPage(MultiPage(
-      header: (context) => Text("INNVOICE ID ${invoice.id}",
+      header: (context) => Text("INVOICE ID ${invoice.id}",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       build: (context) => [
         Column(

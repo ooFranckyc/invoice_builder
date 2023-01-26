@@ -159,14 +159,14 @@ class _HomeFragmentState extends State<HomeFragment> {
   }
 
   final listAvaiblesLocalInvoices = [
-    ['Abstract Black', 'assets/invoices/abstract-black.jpg'],
-    ['Geometric Business', 'assets/invoices/abstract-geometric-business.jpg'],
-    ['Corporative Business', 'assets/invoices/corporative-business.jpg'],
-    ['Elegant Blue', 'assets/invoices/elegant-blue-gray.jpg'],
-    ['Driving School', 'assets/invoices/flat-design-driving-school.jpg'],
-    ['Geometric Architecure', 'assets/invoices/geometric-architecture.jpg'],
-    ['Indoo Potted Plants', 'assets/invoices/indoor-potted-plants.jpg'],
-    ['Minimal Yellow', 'assets/invoices/minimal-yellow.jpg'],
+    ['Abstract Black', 'assets/invoices-local-preview/abstract-black.jpg'],
+    ['Geometric Business', 'assets/invoices-local-preview/abstract-geometric-business.jpg'],
+    ['Corporative Business', 'assets/invoices-local-preview/corporative-business.jpg'],
+    ['Elegant Blue', 'assets/invoices-local-preview/elegant-blue-gray.jpg'],
+    ['Driving School', 'assets/invoices-local-preview/flat-design-driving-school.jpg'],
+    ['Geometric Architecure', 'assets/invoices-local-preview/geometric-architecture.jpg'],
+    ['Indoo Potted Plants', 'assets/invoices-local-preview/indoor-potted-plants.jpg'],
+    ['Minimal Yellow', 'assets/invoices-local-preview/minimal-yellow.jpg'],
   ];
 
   Widget _usingPopularInvoice() {
