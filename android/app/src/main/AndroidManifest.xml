@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.franckydev.invoice_builder">
    <application
-        android:label="invoice_builder"
+        android:label="Invoice Builder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,0 +1,242 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
+import 'package:get/get.dart';
+import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/widgets/invoice_card.dart';
+import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
+
+class HomeFragment extends StatefulWidget {
+  const HomeFragment({super.key});
+
+  @override
+  State<HomeFragment> createState() => _HomeFragmentState();
+}
+
+class _HomeFragmentState extends State<HomeFragment> {
+  final defaultDuration = const Duration(milliseconds: 180);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      physics: const BouncingScrollPhysics(),
+      children: [
+        _headerUserInformation(),
+        _searchTemplateBox(),
+        _tipsForFastBuildInvoiceStepByStep(),
+        _usingTemplateInvoice()
+      ],
+    );
+  }
+
+  Widget _headerUserInformation() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Hi Franck Mekoulou.',
+            style: AppTextStyle.textStyle1(),
+          ),
+          Text(
+            'Let\'s build new invoice',
+            style: AppTextStyle.textStyle5(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _searchTemplateBox() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+              child: Material(
+            elevation: .5,
+            borderRadius: BorderRadius.circular(12),
+            shadowColor: AppColors.cGreyLow,
+            child: Container(
+                padding: const EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                    color: AppColors.cGreyLow, borderRadius: BorderRadius.circular(12.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(CupertinoIcons.search_circle, color: AppColors.cPrimary, size: 30),
+                    const SizedBox(
+                      width: 8.0,
+                    ),
+                    Expanded(
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            hintText: 'Search templates here',
+                            hintStyle:
+                                AppTextStyle.textStyle6(color: AppColors.cPrimary.withOpacity(.50)),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none),
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.search,
+                        scrollPhysics: const BouncingScrollPhysics(),
+                      ),
+                    )
+                  ],
+                )),
+          )),
+          Bounce(
+            duration: defaultDuration,
+            onPressed: () {},
+            child: Container(
+              width: 40.0,
+              height: 40.0,
+              margin: const EdgeInsets.only(left: 8.0),
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(color: AppColors.cPrimary, shape: BoxShape.circle),
+              child: Icon(CupertinoIcons.slider_horizontal_3, color: AppColors.cWhite),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _tipsForFastBuildInvoiceStepByStep() {
+    return Stack(
+      children: [
+        Container(
+          color: AppColors.cGreyLow,
+          width: double.infinity,
+          height: 200.0,
+          margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 50, left: 20, top: 30),
+                child: Text(
+                  'Generate Invoice By Following Just Few Steps !',
+                  style: AppTextStyle.textStyle1(),
+                ),
+              ),
+              const SizedBox(height: 10.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
+                        elevation: const MaterialStatePropertyAll<double?>(.5),
+                        splashFactory: NoSplash.splashFactory),
+                    onPressed: () {
+                      Get.toNamed("/new_invoice");
+                    },
+                    child: Text(
+                      'Generate News',
+                      style: AppTextStyle.textStyleDefaultSystemValue(color: AppColors.cWhite),
+                    )),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _usingTemplateInvoice() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Column(
+        children: [
+          _lastTemplateUsed(),
+          const SizedBox(height: 20.0),
+          _usingPopularInvoice(),
+        ],
+      ),
+    );
+  }
+
+  final listAvaiblesLocalInvoices = [
+    ['Abstract Black', 'assets/invoices/abstract-black.jpg'],
+    ['Geometric Business', 'assets/invoices/abstract-geometric-business.jpg'],
+    ['Corporative Business', 'assets/invoices/corporative-business.jpg'],
+    ['Elegant Blue', 'assets/invoices/elegant-blue-gray.jpg'],
+    ['Driving School', 'assets/invoices/flat-design-driving-school.jpg'],
+    ['Geometric Architecure', 'assets/invoices/geometric-architecture.jpg'],
+    ['Indoo Potted Plants', 'assets/invoices/indoor-potted-plants.jpg'],
+    ['Minimal Yellow', 'assets/invoices/minimal-yellow.jpg'],
+  ];
+
+  Widget _usingPopularInvoice() {
+    return Column(
+      children: [
+        _templateUI(title: 'Popular Templates', action: 'View All'),
+        const SizedBox(height: 10.0),
+        SizedBox(
+            height: 230,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemCount: listAvaiblesLocalInvoices.length,
+                itemBuilder: (context, index) => InvoiceCard(
+                    title: listAvaiblesLocalInvoices[index][0],
+                    heroPreview: listAvaiblesLocalInvoices[index][1])))
+      ],
+    );
+  }
+
+  Widget _lastTemplateUsed() {
+    return Column(
+      children: [
+        _templateUI(title: 'Last used Templates', action: 'View All'),
+        const SizedBox(
+          height: 30.0,
+        ),
+        noTemplateYet()
+      ],
+    );
+  }
+
+  Center noTemplateYet() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'No Template Yet',
+            style: AppTextStyle.textStyle4(),
+          ),
+          Text(
+            'Please create invoice using one template, there showing here',
+            style: AppTextStyle.textStyle6(color: AppColors.cPrimary.withOpacity(.70)),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _templateUI({required String title, required String action}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: AppTextStyle.textStyle4(),
+        ),
+        Bounce(
+          duration: defaultDuration,
+          onPressed: () {},
+          child: Text(
+            action,
+            style: AppTextStyle.textStyleDefaultSystemValue(),
+          ),
+        ),
+      ],
+    );
+  }
+}

@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
+import 'package:get/get.dart';
+import 'package:invoice_builder/shared/colors.dart';
+
+Duration defaultDuration = const Duration(milliseconds: 180);
+AppBar invoiceBuildAppBar(
+    {required String title, required List<Widget> actions, required bool showBackButton}) {
+  return AppBar(
+    elevation: .5,
+    backgroundColor: AppColors.cWhite,
+    leading: showBackButton
+        ? Bounce(
+            duration: defaultDuration,
+            onPressed: () {
+              Get.back();
+            },
+            child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+                margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.all(5.0),
+                child: Icon(Icons.arrow_back, color: AppColors.cPrimary)),
+          )
+        : null,
+    centerTitle: true,
+    title: Text(
+      title,
+      style: TextStyle(
+        color: AppColors.cPrimary,
+        fontWeight: FontWeight.w700,
+      ),
+    ),
+    actions: [
+      Padding(
+        padding: const EdgeInsets.only(right: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: actions,
+        ),
+      )
+    ],
+  );
+}
