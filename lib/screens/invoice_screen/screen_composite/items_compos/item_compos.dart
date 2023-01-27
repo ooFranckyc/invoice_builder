@@ -5,6 +5,7 @@ import 'package:invoice_builder/controllers/items_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/screens/invoice_screen/screen_composite/items_compos/widgets/table_represent_data.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
 import 'package:invoice_builder/shared/widgets/rich_text.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
@@ -44,27 +45,67 @@ class ItemCompoScreen extends GetView<ItemsController> {
                               decoration: BoxDecoration(color: AppColors.cGreyConcentric),
                               children: <Widget>[
                                 TableCell(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    child: const AppText(text: 'Name'),
+                                  child: Tooltip(
+                                    message: 'Item Name',
+                                    showDuration: const Duration(seconds: 2),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.cPrimary,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      child: AppText(
+                                        text: 'Name',
+                                        style: AppTextStyle.textStyle5(weight: FontWeight.w600),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 TableCell(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    child: const AppText(text: 'Item Price'),
+                                  child: Tooltip(
+                                    message: 'Item Price',
+                                    showDuration: const Duration(seconds: 2),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.cPrimary,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      child: AppText(
+                                        text: 'Item Price',
+                                        style: AppTextStyle.textStyle5(weight: FontWeight.w600),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 TableCell(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    child: const AppText(text: 'Quantity'),
+                                  child: Tooltip(
+                                    message: 'Quantity',
+                                    showDuration: const Duration(seconds: 2),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.cPrimary,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      child: AppText(
+                                        text: 'Quantity',
+                                        style: AppTextStyle.textStyle5(weight: FontWeight.w600),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 TableCell(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8),
-                                    child: const AppText(text: 'Actions'),
+                                  child: Tooltip(
+                                    message: 'Edit/Delete',
+                                    showDuration: const Duration(seconds: 2),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.cPrimary,
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(8),
+                                      child: AppText(
+                                        text: 'Actions',
+                                        style: AppTextStyle.textStyle5(weight: FontWeight.w600),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -95,16 +136,28 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                     fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(height: 5),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 65.0),
-                                child: Text(
-                                  "Please press + button for add new item.",
-                                  style: TextStyle(
-                                      color: AppColors.cPrimary,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal),
-                                  textAlign: TextAlign.center,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Please press ",
+                                    style: TextStyle(
+                                        color: AppColors.cPrimary,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const Icon(CupertinoIcons.square_list),
+                                  Text(
+                                    "button for add new item.",
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        color: AppColors.cPrimary,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
+                                  )
+                                ],
                               ),
                             ],
                           ),
@@ -120,6 +173,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                         alignment: Alignment.bottomRight,
                         child: AppRichText(
                           text: "Total: \$",
+                          style: AppTextStyle.textStyle4(weight: FontWeight.w500),
                           children: [
                             TextSpan(text: "${controller.total.value.toStringAsFixed(2)}")
                           ],
@@ -148,15 +202,22 @@ class ItemCompoScreen extends GetView<ItemsController> {
                     AppTextFormField(
                       label: "Item name",
                       controller: controller.itemNameInputController,
+                      isRequired: true,
+                      style: AppTextStyle.textStyle3(weight: FontWeight.w500),
                     ),
                     AppTextFormField(
-                        label: 'Item Price',
-                        controller: controller.itemPriceInputController,
-                        type: TextInputType.number),
+                      label: 'Item Price',
+                      controller: controller.itemPriceInputController,
+                      type: TextInputType.number,
+                      isRequired: true,
+                      style: AppTextStyle.textStyle3(weight: FontWeight.w500),
+                    ),
                     AppTextFormField(
                       label: 'Quantity',
                       controller: controller.itemQtyInputController,
                       type: TextInputType.number,
+                      isRequired: true,
+                      style: AppTextStyle.textStyle3(weight: FontWeight.w500),
                     ),
                     ElevatedButton(
                         style: ButtonStyle(

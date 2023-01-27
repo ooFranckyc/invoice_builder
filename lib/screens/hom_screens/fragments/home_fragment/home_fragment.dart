@@ -116,13 +116,13 @@ class _HomeFragmentState extends State<HomeFragment> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(right: 50, left: 20, top: 30),
+                padding: const EdgeInsets.only(right: 50, left: 20, top: 15),
                 child: Text(
                   'Generate Invoice By Following Just Few Steps !',
                   style: AppTextStyle.textStyle1(),
                 ),
               ),
-              const SizedBox(height: 10.0),
+              const SizedBox(height: 5.0),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: ElevatedButton(
@@ -172,7 +172,7 @@ class _HomeFragmentState extends State<HomeFragment> {
   Widget _usingPopularInvoice() {
     return Column(
       children: [
-        _templateUI(title: 'Popular Templates', action: 'View All'),
+        _templateUI(title: 'Popular Templates', action: 'View All', onPress: () {}),
         const SizedBox(height: 10.0),
         SizedBox(
             height: 230,
@@ -191,7 +191,7 @@ class _HomeFragmentState extends State<HomeFragment> {
   Widget _lastTemplateUsed() {
     return Column(
       children: [
-        _templateUI(title: 'Last used Templates', action: 'View All'),
+        _templateUI(title: 'Last used Templates', action: 'View All', onPress: () {}),
         const SizedBox(
           height: 30.0,
         ),
@@ -220,7 +220,8 @@ class _HomeFragmentState extends State<HomeFragment> {
     );
   }
 
-  Widget _templateUI({required String title, required String action}) {
+  Widget _templateUI(
+      {required String title, required String action, required VoidCallback onPress}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -230,7 +231,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
         Bounce(
           duration: defaultDuration,
-          onPressed: () {},
+          onPressed: onPress,
           child: Text(
             action,
             style: AppTextStyle.textStyleDefaultSystemValue(),

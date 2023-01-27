@@ -9,6 +9,7 @@ import 'package:invoice_builder/controllers/business_ctrl.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
@@ -114,9 +115,8 @@ class BusinessComposScreen extends StatelessWidget {
                                     ),
                                     AppText(
                                       text: "Pick your logo",
-                                      fontSize: AutoDimensions.calcH(15),
-                                      weight: FontWeight.w700,
                                       color: AppColors.cPrimary,
+                                      style: AppTextStyle.textStyle5(),
                                     )
                                   ],
                                 ),

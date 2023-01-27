@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:invoice_builder/env/linker_route.dart';
+import 'package:invoice_builder/screens/hom_screens/blinding.dart';
 import 'package:invoice_builder/screens/hom_screens/home_screen.dart';
 import 'package:invoice_builder/screens/invoice_screen/blinding.dart';
 import 'package:invoice_builder/screens/invoice_screen/invoice_screen.dart';
@@ -21,6 +22,7 @@ class AppRouting {
     GetPage(
         name: AppLinks.homeScreen,
         page: () => const HomeScreen(),
+        binding: HomeBinding(),
         transition: Transition.circularReveal),
     GetPage(
         name: AppLinks.loginScreen,
@@ -60,3 +62,10 @@ class AppRouting {
     ),
   ];
 }
+
+// class HomeBinding extends Bindings {
+//   @override
+//   void dependencies() {
+//     Get.put(AllInvoiceController(), permanent: true);
+//   }
+// }

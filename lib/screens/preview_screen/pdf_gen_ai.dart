@@ -5,97 +5,151 @@ import 'package:pdf/widgets.dart';
 
 class PdfInvoiceGenApi {
   static Future<Uint8List> generate(Invoice invoice) async {
-    const paymentTerms = '${15} days';
-    final titles = <String>['Invoice Number:', 'Invoice Date:', 'Due Date:'];
-    final data = <String>[
-      "100",
-      "15",
-      paymentTerms,
-      "266",
-    ];
+    //const paymentTerms = '${15} days';
+    //final titles = <String>['Invoice Number:', 'Invoice Date:', 'Due Date:'];
+    // final data = <String>[
+    //   "100",
+    //   "15",
+    //   paymentTerms,
+    //   "266",
+    // ];
     final headers = ['Description', 'Quantity', 'Price per item', 'Total'];
     final invoicesData = [...invoice.items.map((e) => e.toList()).toList()];
-    final pdf = Document();
+    final pdf = Document(pageMode: PdfPageMode.fullscreen);
     pdf.addPage(MultiPage(
-      header: (context) => Text("INVOICE ID ${invoice.id}",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+      pageTheme: const PageTheme(margin: EdgeInsets.zero),
+      header: (context) =>
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+        Padding(
+            padding: const EdgeInsets.all(50),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              Transform.rotate(
+                  angle: 120,
+                  child: Container(
+                      width: 30,
+                      height: 30,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: PdfColors.green900),
+                          borderRadius: BorderRadius.circular(5)))),
+              SizedBox(width: 10),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+                Text('FG-Open Source', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text('You are welcome developper'.toUpperCase(),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              ]),
+            ])),
+        Container(
+            decoration:
+                BoxDecoration(color: PdfColors.black, borderRadius: BorderRadius.circular(5)),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Text("INVOICE",
+                style:
+                    TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: PdfColors.white)))
+      ]),
       build: (context) => [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 1 * PdfPageFormat.cm),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    (invoice.from.logo != null)
-                        ? Image(
-                            MemoryImage(invoice.from.logo!),
-                            height: 80,
-                            width: 80,
-                          )
-                        : Text(""),
-                    SizedBox(height: 1 * PdfPageFormat.cm),
-                    Text(invoice.from.name!, style: TextStyle(fontWeight: FontWeight.bold)),
-                    SizedBox(height: 1 * PdfPageFormat.mm),
-                    Text(invoice.from.address!),
-                  ],
-                ),
-                Container(
-                  height: 80,
-                  width: 80,
-                  child: BarcodeWidget(
-                    barcode: Barcode.qrCode(),
-                    data: invoice.id,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: .3 * PdfPageFormat.cm),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // (invoice.from.logo != null)
+                      //     ? Image(
+                      //         MemoryImage(invoice.from.logo!),
+                      //         height: 80,
+                      //         width: 80,
+                      //       )
+                      //     : Text(""),
+                      // SizedBox(height: 1 * PdfPageFormat.cm),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Invoice to:',
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                          Text(invoice.to.name,
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                          Text(invoice.from.address!,
+                              style: TextStyle(color: PdfColors.black.shade(.70), fontSize: 14)),
+                        ],
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 1 * PdfPageFormat.cm),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(invoice.to.name, style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text(invoice.from.address!),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(titles.length, (index) {
-                    final title = titles[index];
-                    final value = data[index];
-
-                    return buildText(title: title, value: value, width: 200);
-                  }),
-                ),
-              ],
-            ),
-          ],
+                  SizedBox(
+                      width: 210,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text('Invoice# ',
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                                  Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(invoice.id,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: PdfColors.grey500,
+                                              fontWeight: FontWeight.bold)))
+                                ]),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Text('Date ',
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                                  Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(invoice.date,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: PdfColors.grey500,
+                                              fontWeight: FontWeight.bold)))
+                                ]),
+                          ]))
+                ],
+              ),
+            ],
+          ),
         ),
-        SizedBox(height: 3 * PdfPageFormat.cm),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Invoice details',
-              style: const TextStyle(fontSize: 18),
-            ),
-            SizedBox(height: 0.8 * PdfPageFormat.cm),
-          ],
+        SizedBox(height: 2.55 * PdfPageFormat.cm),
+        Container(
+          width: double.infinity,
+          decoration:
+              BoxDecoration(color: PdfColors.green100, borderRadius: BorderRadius.circular(5)),
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Invoice details',
+                style: TextStyle(fontSize: 20, color: PdfColors.black, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                'All items price has ',
+                style: const TextStyle(fontSize: 14),
+              ),
+            ],
+          ),
         ),
+        SizedBox(height: 0.5 * PdfPageFormat.cm),
         Table.fromTextArray(
           headers: headers,
           data: invoicesData,
           border: null,
           headerStyle: TextStyle(fontWeight: FontWeight.bold),
-          headerDecoration: const BoxDecoration(color: PdfColors.grey300),
+          headerDecoration: const BoxDecoration(color: PdfColors.amber300),
           cellHeight: 30,
           cellAlignments: {
             0: Alignment.centerLeft,

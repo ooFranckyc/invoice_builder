@@ -31,7 +31,6 @@ class AppBtn extends StatelessWidget {
       child: AppText(
         text: label,
         color: textColor ?? AppColors.cPrimary,
-        weight: FontWeight.w700,
       ),
     );
   }

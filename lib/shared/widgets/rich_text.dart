@@ -10,21 +10,21 @@ class AppRichText extends StatelessWidget {
   final double height;
   final Color color;
   final TextAlign align;
-  final FontWeight weight;
   final List<TextSpan> children;
   final TextDirection? direction;
-  const AppRichText({
-    Key? key,
-    required this.text,
-    this.children = const <TextSpan>[],
-    this.fontSize,
-    this.direction,
-    this.spacing = 0,
-    this.height = 1,
-    this.color = Colors.black,
-    this.align = TextAlign.center,
-    this.weight = FontWeight.normal,
-  }) : super(key: key);
+  final TextStyle? style;
+  const AppRichText(
+      {Key? key,
+      required this.text,
+      this.children = const <TextSpan>[],
+      this.fontSize,
+      this.direction,
+      this.spacing = 0,
+      this.height = 1,
+      this.color = Colors.black,
+      this.align = TextAlign.center,
+      this.style})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class AppRichText extends StatelessWidget {
       textDirection: direction,
       text: TextSpan(
         text: text,
-        style: AppTextStyle.textStyle3(),
+        style: style ?? AppTextStyle.textStyle3(),
         children: [...children.toList()],
       ),
     );

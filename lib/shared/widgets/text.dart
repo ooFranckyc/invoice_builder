@@ -3,24 +3,24 @@ import 'package:invoice_builder/shared/style.dart';
 
 class AppText extends StatelessWidget {
   final String text;
-  final double? fontSize;
   final double spacing;
   final double height;
   final Color color;
   final TextAlign align;
-  final FontWeight weight;
   final TextDirection? textdirection;
   final TextOverflow? overflow;
+  final TextStyle? style;
+  final int maxline;
   const AppText({
     required this.text,
-    this.fontSize,
     this.spacing = 0,
     this.height = 1,
+    this.maxline = 1,
     this.color = Colors.black,
     this.align = TextAlign.center,
-    this.weight = FontWeight.normal,
     this.overflow,
     this.textdirection,
+    this.style,
     Key? key,
   }) : super(key: key);
 
@@ -46,11 +46,11 @@ class AppText extends StatelessWidget {
     // );
     return Text(
       text,
-      maxLines: 1,
+      maxLines: maxline,
       overflow: overflow ?? TextOverflow.ellipsis,
       textDirection: textdirection ?? TextDirection.ltr,
       textAlign: align,
-      style: AppTextStyle.textStyle3(color: color),
+      style: style ?? AppTextStyle.textStyle3(color: color),
     );
   }
 }

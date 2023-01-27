@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/items_ctrl.dart';
 import 'package:invoice_builder/models/item.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 
 TableRow TableDataRepresentation({required Item? item}) {
@@ -17,7 +18,7 @@ TableRow TableDataRepresentation({required Item? item}) {
           padding: const EdgeInsets.all(8),
           child: AppText(
             text: (item != null) ? item.name : "null",
-            fontSize: 13,
+            style: AppTextStyle.textStyle4(),
           ),
         ),
       ),
@@ -28,7 +29,7 @@ TableRow TableDataRepresentation({required Item? item}) {
           padding: const EdgeInsets.all(8),
           child: AppText(
             text: (item != null) ? "\$${item.price.toStringAsFixed(2)}" : "-",
-            fontSize: 13,
+            style: AppTextStyle.textStyle4(),
           ),
         ),
       ),
@@ -39,7 +40,7 @@ TableRow TableDataRepresentation({required Item? item}) {
           padding: const EdgeInsets.all(8),
           child: AppText(
             text: (item != null) ? "${item.qty}" : "-",
-            fontSize: 13,
+            style: AppTextStyle.textStyle4(),
           ),
         ),
       ),

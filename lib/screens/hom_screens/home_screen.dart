@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       menuScreen: const MenuScreen(),
       mainScreen: const MainScreen(),
       androidCloseOnBackTap: true,
-      angle: 0.0,
+      angle: -1,
       slideWidth: MediaQuery.of(context).size.width * 0.65,
       borderRadius: 24.0,
       showShadow: true,
@@ -256,24 +256,28 @@ class _MainScreenState extends State<MainScreen> {
               PersistentBottomNavBarItem(
                   activeColorPrimary: Colors.black,
                   title: 'Home',
+                  textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     CupertinoIcons.home,
                   )),
               PersistentBottomNavBarItem(
                   activeColorPrimary: Colors.black,
                   title: 'Templates',
+                  textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     CupertinoIcons.doc_text_search,
                   )),
               PersistentBottomNavBarItem(
                   activeColorPrimary: Colors.black,
                   title: 'History',
+                  textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     Icons.history,
                   )),
               PersistentBottomNavBarItem(
                   activeColorPrimary: Colors.black,
                   title: 'Profile',
+                  textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     CupertinoIcons.profile_circled,
                   )),

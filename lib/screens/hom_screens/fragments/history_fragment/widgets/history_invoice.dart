@@ -54,8 +54,6 @@ class HistoryInvoiceView extends StatelessWidget {
                             child: AppText(
                               text: "Invoice ID #${invoice.id}",
                               align: TextAlign.left,
-                              fontSize: AutoDimensions.calcH(18),
-                              weight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -69,8 +67,6 @@ class HistoryInvoiceView extends StatelessWidget {
                             child: AppText(
                               text: invoice.to.name,
                               align: TextAlign.left,
-                              fontSize: AutoDimensions.calcH(18),
-                              weight: FontWeight.w600,
                               color: Colors.grey.withOpacity(0.4),
                             ),
                           ),
@@ -85,8 +81,6 @@ class HistoryInvoiceView extends StatelessWidget {
                             child: AppText(
                               text: invoice.date,
                               align: TextAlign.left,
-                              fontSize: AutoDimensions.calcH(18),
-                              weight: FontWeight.w600,
                               color: Colors.grey.withOpacity(0.4),
                             ),
                           ),

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:get/get.dart';
@@ -26,12 +27,35 @@ class InvoiceScreen extends StatelessWidget {
             Bounce(
               duration: const Duration(milliseconds: 180),
               onPressed: () {},
-              child: Container(
-                width: 40,
-                height: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
-                child: Icon(Icons.info_rounded, color: AppColors.cPrimary),
+              child: Tooltip(
+                message: 'Read minimal instructions.',
+                decoration: BoxDecoration(
+                    color: AppColors.cPrimary, borderRadius: BorderRadius.circular(5)),
+                showDuration: const Duration(seconds: 3),
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+                  child: Icon(Icons.info_outline, color: AppColors.cPrimary),
+                ),
+              ),
+            ),
+            Bounce(
+              duration: const Duration(milliseconds: 180),
+              onPressed: () {},
+              child: Tooltip(
+                message: 'Use template for cute result',
+                decoration: BoxDecoration(
+                    color: AppColors.cPrimary, borderRadius: BorderRadius.circular(5)),
+                showDuration: const Duration(seconds: 3),
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+                  child: Icon(CupertinoIcons.doc_text_search, color: AppColors.cPrimary),
+                ),
               ),
             )
           ],
@@ -88,7 +112,7 @@ class InvoiceScreen extends StatelessWidget {
                         title: 'Invoice to',
                         subTitle: 'add payer',
                         onTap: () {
-                          Get.toNamed("/add_payer");
+                          Get.toNamed("/add_client");
                         },
                         isComplete: (controller.client != null) ? true : false,
                         showArrow: (controller.client != null) ? false : true),

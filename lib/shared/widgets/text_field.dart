@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/rich_text.dart';
 
 class AppTextFormField extends StatelessWidget {
@@ -11,6 +12,7 @@ class AppTextFormField extends StatelessWidget {
   final String? hint;
   final bool isRequired;
   final double? height;
+  final TextStyle? style;
   const AppTextFormField({
     required this.label,
     required this.controller,
@@ -18,6 +20,7 @@ class AppTextFormField extends StatelessWidget {
     this.type,
     this.height,
     this.isRequired = false,
+    this.style,
     Key? key,
   }) : super(key: key);
 
@@ -33,6 +36,7 @@ class AppTextFormField extends StatelessWidget {
         children: [
           AppRichText(
             text: label,
+            style: style ?? AppTextStyle.textStyle3(),
             children: (isRequired)
                 ? [
                     TextSpan(

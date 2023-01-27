@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
             )),
         body: Center(
             child: AnimatedTextKit(totalRepeatCount: 2, animatedTexts: [
-          FadeAnimatedText('Invoice Creator',
+          FadeAnimatedText('Invoice Builder',
               duration: const Duration(milliseconds: 1500),
               textStyle: AppTextStyle.textStyle1(color: AppColors.cWhite))
         ])));

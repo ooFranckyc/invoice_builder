@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 
 String title = "";
 AppBar mainAppBar({required BuildContext context, required int index}) {
@@ -36,7 +37,10 @@ AppBar mainAppBar({required BuildContext context, required int index}) {
           child: const Icon(Icons.menu)),
     ),
     centerTitle: true,
-    title: Text(title),
+    title: Text(
+      title,
+      style: AppTextStyle.textStyle3(),
+    ),
     iconTheme: IconThemeData(
       color: AppColors.cPrimary,
     ),

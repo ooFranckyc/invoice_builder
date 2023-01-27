@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoices_ctrl.dart';
-import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/history_fragment/widgets/history_invoice.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 
 class HistoryFragment extends GetView<AllInvoiceController> {
@@ -21,14 +21,20 @@ class HistoryFragment extends GetView<AllInvoiceController> {
               AppText(
                 text: 'No Invoice Build Yet',
                 color: AppColors.cPrimary,
-                fontSize: AutoDimensions.calcH(20),
-                weight: FontWeight.w700,
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: AppText(
+                  text: 'However, all your created invoice history will be displayed this way.',
+                  color: AppColors.cPrimary.withOpacity(.70),
+                  maxline: 2,
+                  style: AppTextStyle.textStyle6(),
+                ),
+              )
             ],
           ),
         );
       } else {
-        // Build All Invoice Recently Create
         return Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(

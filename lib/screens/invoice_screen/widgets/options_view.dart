@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 
 class OptionView extends StatelessWidget {
@@ -43,16 +43,14 @@ class OptionView extends StatelessWidget {
                 AppText(
                   text: title,
                   align: TextAlign.left,
-                  fontSize: AutoDimensions.calcH(17),
-                  weight: FontWeight.bold,
+                  style: AppTextStyle.textStyle4(weight: FontWeight.w700),
                 ),
                 const SizedBox(height: 3),
                 AppText(
                   text: subTitle ?? "",
                   align: TextAlign.left,
-                  fontSize: AutoDimensions.calcH(14),
-                  weight: FontWeight.normal,
                   color: AppColors.cPrimary.withOpacity(.30),
+                  style: AppTextStyle.textStyle5(weight: FontWeight.normal),
                 ),
               ],
             )),
