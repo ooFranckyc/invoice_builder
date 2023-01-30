@@ -9,11 +9,11 @@ import 'package:invoice_builder/shared/style.dart';
 String title = "";
 AppBar mainAppBar({required BuildContext context, required int index}) {
   if (index == 0) {
-    title = 'Invoice Creator';
+    title = 'Invoice Builder';
   } else if (index == 1) {
     title = 'Search Template';
   } else if (index == 2) {
-    title = 'Recent Invoice';
+    title = 'History Invoice';
   } else if (index == 3) {
     title = 'Profile';
   }
@@ -39,7 +39,7 @@ AppBar mainAppBar({required BuildContext context, required int index}) {
     centerTitle: true,
     title: Text(
       title,
-      style: AppTextStyle.textStyle3(),
+      style: AppTextStyle.textStyle2(),
     ),
     iconTheme: IconThemeData(
       color: AppColors.cPrimary,

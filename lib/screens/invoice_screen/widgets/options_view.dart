@@ -32,7 +32,7 @@ class OptionView extends StatelessWidget {
         decoration: BoxDecoration(
             border: isComplete
                 ? Border.all(width: 0.0, color: AppColors.cTransparent)
-                : Border.all(width: 1.55, color: AppColors.cPrimary.withOpacity(.70)),
+                : Border.all(width: 1, color: AppColors.cPrimary.withOpacity(.70)),
             borderRadius: BorderRadius.circular(12)),
         child: Row(
           children: [
@@ -45,7 +45,7 @@ class OptionView extends StatelessWidget {
                   align: TextAlign.left,
                   style: AppTextStyle.textStyle4(weight: FontWeight.w700),
                 ),
-                const SizedBox(height: 3),
+                const SizedBox(height: 2),
                 AppText(
                   text: subTitle ?? "",
                   align: TextAlign.left,
@@ -59,7 +59,7 @@ class OptionView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                        color: AppColors.cGreyConcentric.withOpacity(.70),
+                        color: AppColors.cGreyConcentric.withOpacity(.30),
                         borderRadius: BorderRadius.circular(8.0)),
                     child: Icon(Icons.arrow_right_alt, color: AppColors.cPrimary, size: 25),
                   )

@@ -78,6 +78,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       setState(() {
                         currentIndex = 0;
                       });
+                      ZoomDrawer.of(context)!.toggle();
                     },
                     child: optionMenuTitle(
                         title: 'Home Page',
@@ -89,6 +90,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     setState(() {
                       currentIndex = 1;
                     });
+                    ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
                       title: 'Templates',
@@ -101,6 +103,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     setState(() {
                       currentIndex = 2;
                     });
+                    ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
                       title: 'Notifications',
@@ -113,6 +116,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     setState(() {
                       currentIndex = 3;
                     });
+                    ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
                       title: 'Rate US',
@@ -125,6 +129,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     setState(() {
                       currentIndex = 4;
                     });
+                    ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
                       title: 'Help Center',
@@ -137,6 +142,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     setState(() {
                       currentIndex = 5;
                     });
+                    ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
                       title: 'Sign Out',
@@ -165,13 +171,14 @@ class _MenuScreenState extends State<MenuScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(icon, size: 25.0, color: AppColors.cWhite.withOpacity(.80)),
-          const SizedBox(width: 20.0),
+          const SizedBox(width: 10.0),
           Text(
             title,
-            style: TextStyle(
-                color: AppColors.cWhite.withOpacity(.80),
-                fontSize: 16.3,
-                fontWeight: FontWeight.w700),
+            style: AppTextStyle.textStyle5(color: AppColors.cWhite.withOpacity(.80)),
+            // style: TextStyle(
+            //     color: AppColors.cWhite.withOpacity(.80),
+            //     fontSize: 16.3,
+            //     fontWeight: FontWeight.w700),
           )
         ],
       ),

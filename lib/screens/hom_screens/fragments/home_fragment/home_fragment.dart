@@ -1,5 +1,7 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/widgets/invoice_card.dart';
@@ -110,7 +112,6 @@ class _HomeFragmentState extends State<HomeFragment> {
         Container(
           color: AppColors.cGreyLow,
           width: double.infinity,
-          height: 200.0,
           margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,20 +123,22 @@ class _HomeFragmentState extends State<HomeFragment> {
                   style: AppTextStyle.textStyle1(),
                 ),
               ),
-              const SizedBox(height: 5.0),
+              const SizedBox(height: 8.0),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 20.0, bottom: 10),
                 child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
                         elevation: const MaterialStatePropertyAll<double?>(.5),
+                        padding: const MaterialStatePropertyAll<EdgeInsets>(
+                            EdgeInsets.symmetric(vertical: 8, horizontal: 15)),
                         splashFactory: NoSplash.splashFactory),
                     onPressed: () {
                       Get.toNamed("/new_invoice");
                     },
                     child: Text(
                       'Generate News',
-                      style: AppTextStyle.textStyleDefaultSystemValue(color: AppColors.cWhite),
+                      style: AppTextStyle.textStyle3(color: AppColors.cWhite),
                     )),
               )
             ],
@@ -181,9 +184,34 @@ class _HomeFragmentState extends State<HomeFragment> {
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 itemCount: listAvaiblesLocalInvoices.length,
-                itemBuilder: (context, index) => InvoiceCard(
-                    title: listAvaiblesLocalInvoices[index][0],
-                    heroPreview: listAvaiblesLocalInvoices[index][1])))
+                itemBuilder: (context, index) => OpenContainer(
+                      closedBuilder: (BuildContext context, void Function() action) {
+                        return InvoiceCard(
+                            title: listAvaiblesLocalInvoices[index][0],
+                            heroPreview: listAvaiblesLocalInvoices[index][1]);
+                      },
+                      openBuilder:
+                          (BuildContext context, void Function({Object? returnValue}) action) {
+                        return Scaffold(
+                            appBar: AppBar(
+                              backgroundColor: AppColors.cWhite,
+                              elevation: .0,
+                              systemOverlayStyle: SystemUiOverlayStyle(
+                                  statusBarBrightness: Brightness.dark,
+                                  statusBarIconBrightness: Brightness.dark,
+                                  statusBarColor: AppColors.cWhite),
+                              centerTitle: true,
+                              automaticallyImplyLeading: true,
+                              iconTheme: IconThemeData(color: AppColors.cPrimary),
+                              title: Text(
+                                listAvaiblesLocalInvoices[index][0],
+                                style: AppTextStyle.textStyle3(color: AppColors.cPrimary),
+                              ),
+                            ),
+                            backgroundColor: AppColors.cWhite,
+                            body: Column());
+                      },
+                    )))
       ],
     );
   }

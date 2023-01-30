@@ -48,6 +48,7 @@ class AppTextStyle {
       fontSize: AutoDimensions.calcH(16),
       color: color ?? AppColors.cPrimary,
       fontWeight: weight ?? FontWeight.normal,
+      wordSpacing: 1,
       fontStyle: style ?? FontStyle.normal);
 
   static TextStyle textStyle6({Color? color, FontStyle? style, FontWeight? weight}) => TextStyle(

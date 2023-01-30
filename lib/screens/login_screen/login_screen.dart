@@ -48,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark,
               statusBarColor: AppColors.cWhite)),
+      backgroundColor: AppColors.cWhite,
       body: Center(
           child: Padding(
         padding: EdgeInsets.symmetric(vertical: AutoDimensions.calcH(28.0)),
@@ -55,21 +56,24 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Welcome !',
                 style: AppTextStyle.textStyle0(),
               ),
+              const SizedBox(
+                height: 2,
+              ),
               Text(
                 'Easy, Efficient and Productive.',
-                style: AppTextStyle.textStyle7(),
+                style: AppTextStyle.textStyle6(),
               ),
               const SizedBox(height: 10),
               Text(
                 'Invoice creator allows you to build different invoices in a professional way with thousands of free templates. Log in and build invoices for your customers.',
-                style: AppTextStyle.textStyle6(),
-                textAlign: TextAlign.center,
+                style: AppTextStyle.textStyle5(color: AppColors.cPrimary.withOpacity(.70)),
+                textAlign: TextAlign.start,
               ),
               SizedBox(height: AutoDimensions.calcH(60)),
               Bounce(
@@ -88,16 +92,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: AppColors.cWhite,
-                      border: Border.all(width: 1.55, color: AppColors.cPrimary),
+                      //border: Border.all(width: .5, color: AppColors.cPrimary),
                       borderRadius: BorderRadius.circular(12)),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/google.png', width: 40, height: 40),
+                      const SizedBox(width: 5),
                       Text(
-                        'Continue With Google',
-                        style: AppTextStyle.textStyle6(weight: FontWeight.w700),
+                        'SignIn with Google',
+                        style: AppTextStyle.textStyle5(weight: FontWeight.normal),
                       )
                     ],
                   ),
@@ -124,16 +129,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: AppColors.cWhite,
-                      border: Border.all(width: 1.55, color: AppColors.cPrimary),
+                      //border: Border.all(width: .5, color: AppColors.cPrimary),
                       borderRadius: BorderRadius.circular(12)),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset('assets/apple.png', width: 40, height: 40),
+                      const SizedBox(width: 5),
                       Text(
-                        'Continue With Apple',
-                        style: AppTextStyle.textStyle6(weight: FontWeight.w700),
+                        'SignIn with Apple',
+                        style: AppTextStyle.textStyle6(weight: FontWeight.normal),
                       )
                     ],
                   ),

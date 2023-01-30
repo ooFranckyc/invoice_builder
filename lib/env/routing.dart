@@ -25,13 +25,11 @@ class AppRouting {
         binding: HomeBinding(),
         transition: Transition.circularReveal),
     GetPage(
-        name: AppLinks.loginScreen,
-        page: () => const LoginScreen(),
-        transition: Transition.rightToLeft),
+        name: AppLinks.loginScreen, page: () => const LoginScreen(), transition: Transition.fadeIn),
     GetPage(
       name: AppLinks.newInvoice,
       page: () => const InvoiceScreen(),
-      transition: Transition.rightToLeft,
+      transition: Transition.native,
       binding: InvoiceBinding(),
     ),
     GetPage(

@@ -60,6 +60,7 @@ class InvoiceScreen extends StatelessWidget {
             )
           ],
           showBackButton: true),
+      backgroundColor: AppColors.cWhite,
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (scroll) {
           scroll.disallowIndicator();
@@ -158,7 +159,7 @@ class InvoiceScreen extends StatelessWidget {
                           action: () async {
                             if (controller.business != null &&
                                 controller.client != null &&
-                                controller.signature != null &&
+                                //controller.signature != null &&
                                 controller.paymentInstructions != null &&
                                 controller.itemsList.isNotEmpty) {
                               Invoice invoice = await controller.generatePreviewInvoice();

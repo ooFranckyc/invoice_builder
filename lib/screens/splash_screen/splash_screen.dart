@@ -54,10 +54,16 @@ class _SplashScreenState extends State<SplashScreen> {
               systemNavigationBarIconBrightness: Brightness.dark,
             )),
         body: Center(
-            child: AnimatedTextKit(totalRepeatCount: 2, animatedTexts: [
-          FadeAnimatedText('Invoice Builder',
-              duration: const Duration(milliseconds: 1500),
-              textStyle: AppTextStyle.textStyle1(color: AppColors.cWhite))
-        ])));
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AnimatedTextKit(totalRepeatCount: 2, animatedTexts: [
+              FadeAnimatedText('Invoice Builder',
+                  duration: const Duration(milliseconds: 1500),
+                  textStyle: AppTextStyle.textStyle1(color: AppColors.cWhite))
+            ]),
+          ],
+        )));
   }
 }
