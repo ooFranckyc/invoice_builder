@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/models/business.dart';
-import 'package:invoice_builder/shared/colors.dart';
 
 class BusinessController extends GetxController {
   Business? business;
@@ -17,12 +16,6 @@ class BusinessController extends GetxController {
         businessEmailInputController.text.isEmpty ||
         businessPhoneInputController.text.isEmpty ||
         businessAddressInputController.text.isEmpty) {
-      Get.snackbar("Error", "Please Fill all the required fields for validate business sections.",
-          backgroundColor: AppColors.cPrimary.withOpacity(.85),
-          colorText: AppColors.cWhite,
-          animationDuration: const Duration(milliseconds: 400),
-          isDismissible: true,
-          snackPosition: SnackPosition.TOP);
       return false;
     } else {
       business = Business(

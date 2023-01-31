@@ -59,6 +59,7 @@ dependencies:
   shared_preferences: ^2.0.16
   google_sign_in: ^5.4.3
   provider: ^6.0.5
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:
@@ -87,6 +88,7 @@ flutter:
     - assets/
     - assets/fonts/
     - assets/images/
+    - assets/icons/
     - assets/invoices-local-preview/
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -101,9 +103,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Poppins
+    - family: Montserrat
       fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
           style: normal
   #   - family: Trajan Pro
   #     fonts:

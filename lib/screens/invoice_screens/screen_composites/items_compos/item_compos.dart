@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:invoice_builder/controllers/items_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
-import 'package:invoice_builder/screens/invoice_screen/screen_composite/items_compos/widgets/table_represent_data.dart';
+import 'package:invoice_builder/screens/invoice_screens/screen_composites/items_compos/widgets/table_represent_data.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';

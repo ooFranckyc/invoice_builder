@@ -32,28 +32,17 @@ class OptionView extends StatelessWidget {
         decoration: BoxDecoration(
             border: isComplete
                 ? Border.all(width: 0.0, color: AppColors.cTransparent)
-                : Border.all(width: 1, color: AppColors.cPrimary.withOpacity(.70)),
-            borderRadius: BorderRadius.circular(12)),
+                : Border.all(width: 1.55, color: AppColors.cPrimary.withOpacity(.70)),
+            borderRadius: BorderRadius.circular(8)),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppText(
-                  text: title,
-                  align: TextAlign.left,
-                  style: AppTextStyle.textStyle4(weight: FontWeight.w700),
-                ),
-                const SizedBox(height: 2),
-                AppText(
-                  text: subTitle ?? "",
-                  align: TextAlign.left,
-                  color: AppColors.cPrimary.withOpacity(.30),
-                  style: AppTextStyle.textStyle5(weight: FontWeight.normal),
-                ),
-              ],
-            )),
+            AppText(
+              text: title,
+              align: TextAlign.left,
+              style: AppTextStyle.textStyle3(weight: FontWeight.w800, color: AppColors.cPrimary),
+            ),
+            const Spacer(),
             (showArrow)
                 ? Container(
                     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -69,12 +58,11 @@ class OptionView extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 15.0),
                     child: Align(
                       alignment: Alignment.centerRight,
-                      child: Expanded(
-                        child: SvgPicture.asset(
-                          "assets/images/success_circle.svg",
-                          height: 25,
-                          color: Colors.green[600],
-                        ),
+                      child: SvgPicture.asset(
+                        "assets/icons/success_circle.svg",
+                        height: 25,
+                        width: 25,
+                        color: Colors.green[600],
                       ),
                     ),
                   )

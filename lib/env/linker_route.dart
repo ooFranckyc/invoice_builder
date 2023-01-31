@@ -8,4 +8,5 @@ class AppLinks {
   static const String newItem = "/add_items";
   static const String signature = "/sign_invoice";
   static const String preview = "/build_preview";
+  static const String notification = "/notification_screen";
 }

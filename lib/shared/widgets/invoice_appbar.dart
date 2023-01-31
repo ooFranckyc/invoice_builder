@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/style.dart';
 
@@ -47,7 +48,9 @@ AppBar mainAppBar({required BuildContext context, required int index}) {
     actions: [
       Bounce(
         duration: const Duration(milliseconds: 190),
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed('/notification_screen');
+        },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Icon(

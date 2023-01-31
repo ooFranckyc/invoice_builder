@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,9 +10,11 @@ import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/home
 import 'package:invoice_builder/screens/hom_screens/fragments/profile_fragment/profile_fragment.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/template_fragment/template_fragment.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_appbar.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -45,10 +49,24 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   final defaultDuration = const Duration(milliseconds: 180);
   int currentIndex = 0;
+  final preferences = SharedPreferences.getInstance();
+  String username = 'Random User', profile = 'assets/google.png';
+
+  getInfo() async {
+    final SharedPreferences pref = await preferences;
+    final sharedName = (pref.getString(FirestoreConstantsKey.nickname));
+    final sharedProfile = (pref.getString(FirestoreConstantsKey.photoUrl));
+    log('Photo url is: $sharedProfile'); // just for debug
+    setState(() {
+      username = sharedName!;
+      profile = sharedProfile!;
+    });
+  }
 
   @override
   void initState() {
     currentIndex = 0;
+    getInfo();
     super.initState();
   }
 
@@ -196,6 +214,7 @@ class _MenuScreenState extends State<MenuScreen> {
             height: 80.0,
             decoration: BoxDecoration(
                 color: Colors.blue,
+                image: DecorationImage(image: NetworkImage(profile), fit: BoxFit.cover),
                 border: Border.all(width: 2, color: Colors.white),
                 shape: BoxShape.circle),
           ),
@@ -204,10 +223,10 @@ class _MenuScreenState extends State<MenuScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hi, Franck',
-                style: AppTextStyle.textStyle2(),
+                'Hi, ${username.split(' ')[0]}',
+                style: AppTextStyle.textStyle2(color: AppColors.cWhite),
               ),
-              Text('Welcome.', style: AppTextStyle.textStyle4()),
+              Text('Welcome.', style: AppTextStyle.textStyle4(color: AppColors.cWhite)),
             ],
           )
         ],

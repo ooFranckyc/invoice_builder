@@ -4,6 +4,7 @@ import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
+import 'package:invoice_builder/shared/widgets/snackbar.dart';
 import 'package:invoice_builder/shared/widgets/text_field.dart';
 
 class PaymentInstructionsScreen extends GetView<InvoiceController> {
@@ -38,12 +39,12 @@ class PaymentInstructionsScreen extends GetView<InvoiceController> {
                 ),
               ),
               AppBtn(
-                label: 'Save Instructions',
+                label: 'Save',
                 action: () {
                   if (_paymentInstInputController.text.isEmpty ||
                       _paymentInstInputController.text.length < 5) {
-                    Get.snackbar("Error", "Please check your entries and try again!",
-                        snackPosition: SnackPosition.BOTTOM);
+                    messageWithSnackbar(
+                        context: context, message: "Please check your entries and try again!");
                   } else {
                     controller.setPaymentInstructions(_paymentInstInputController.text);
                     Get.close(1);

@@ -1,12 +1,14 @@
 import 'package:animations/animations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/widgets/invoice_card.dart';
+import 'package:invoice_builder/screens/templates_screens/template_screen.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/style.dart';
+import 'package:invoice_builder/shared/widgets/searchbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeFragment extends StatefulWidget {
   const HomeFragment({super.key});
@@ -17,6 +19,22 @@ class HomeFragment extends StatefulWidget {
 
 class _HomeFragmentState extends State<HomeFragment> {
   final defaultDuration = const Duration(milliseconds: 180);
+  final preferences = SharedPreferences.getInstance();
+  String? fullname = 'Random User';
+
+  getInfo() async {
+    final SharedPreferences pref = await preferences;
+    final uname = (pref.getString(FirestoreConstantsKey.nickname));
+    setState(() {
+      fullname = uname!;
+    });
+  }
+
+  @override
+  void initState() {
+    getInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +42,7 @@ class _HomeFragmentState extends State<HomeFragment> {
       physics: const BouncingScrollPhysics(),
       children: [
         _headerUserInformation(),
-        _searchTemplateBox(),
+        const InvoiceSearchBar(),
         _tipsForFastBuildInvoiceStepByStep(),
         _usingTemplateInvoice()
       ],
@@ -38,69 +56,13 @@ class _HomeFragmentState extends State<HomeFragment> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Hi Franck Mekoulou.',
+            'Hi, ${fullname!.split(' ')[0]}',
             style: AppTextStyle.textStyle1(),
           ),
           Text(
             'Let\'s build new invoice',
             style: AppTextStyle.textStyle5(),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _searchTemplateBox() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-              child: Material(
-            elevation: .5,
-            borderRadius: BorderRadius.circular(12),
-            shadowColor: AppColors.cGreyLow,
-            child: Container(
-                padding: const EdgeInsets.all(5.0),
-                decoration: BoxDecoration(
-                    color: AppColors.cGreyLow, borderRadius: BorderRadius.circular(12.0)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(CupertinoIcons.search_circle, color: AppColors.cPrimary, size: 30),
-                    const SizedBox(
-                      width: 8.0,
-                    ),
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            hintText: 'Search templates here',
-                            hintStyle:
-                                AppTextStyle.textStyle6(color: AppColors.cPrimary.withOpacity(.50)),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none),
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.search,
-                        scrollPhysics: const BouncingScrollPhysics(),
-                      ),
-                    )
-                  ],
-                )),
-          )),
-          Bounce(
-            duration: defaultDuration,
-            onPressed: () {},
-            child: Container(
-              width: 40.0,
-              height: 40.0,
-              margin: const EdgeInsets.only(left: 8.0),
-              alignment: Alignment.center,
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(color: AppColors.cPrimary, shape: BoxShape.circle),
-              child: Icon(CupertinoIcons.slider_horizontal_3, color: AppColors.cWhite),
-            ),
-          )
         ],
       ),
     );
@@ -162,14 +124,54 @@ class _HomeFragmentState extends State<HomeFragment> {
   }
 
   final listAvaiblesLocalInvoices = [
-    ['Abstract Black', 'assets/invoices-local-preview/abstract-black.jpg'],
-    ['Geometric Business', 'assets/invoices-local-preview/abstract-geometric-business.jpg'],
-    ['Corporative Business', 'assets/invoices-local-preview/corporative-business.jpg'],
-    ['Elegant Blue', 'assets/invoices-local-preview/elegant-blue-gray.jpg'],
-    ['Driving School', 'assets/invoices-local-preview/flat-design-driving-school.jpg'],
-    ['Geometric Architecure', 'assets/invoices-local-preview/geometric-architecture.jpg'],
-    ['Indoo Potted Plants', 'assets/invoices-local-preview/indoor-potted-plants.jpg'],
-    ['Minimal Yellow', 'assets/invoices-local-preview/minimal-yellow.jpg'],
+    [
+      'Abstract Black',
+      'assets/invoices-local-preview/abstract-black.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
+    [
+      'Geometric Business',
+      'assets/invoices-local-preview/abstract-geometric-business.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
+    [
+      'Corporative Business',
+      'assets/invoices-local-preview/corporative-business.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
+    [
+      'Elegant Blue',
+      'assets/invoices-local-preview/elegant-blue-gray.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
+    [
+      'Driving School',
+      'assets/invoices-local-preview/flat-design-driving-school.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
+    [
+      'Geometric Architecure',
+      'assets/invoices-local-preview/geometric-architecture.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
+    [
+      'Indoo Potted Plants',
+      'assets/invoices-local-preview/indoor-potted-plants.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
+    [
+      'Minimal Yellow',
+      'assets/invoices-local-preview/minimal-yellow.jpg',
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
+      'false'
+    ],
   ];
 
   Widget _usingPopularInvoice() {
@@ -192,24 +194,11 @@ class _HomeFragmentState extends State<HomeFragment> {
                       },
                       openBuilder:
                           (BuildContext context, void Function({Object? returnValue}) action) {
-                        return Scaffold(
-                            appBar: AppBar(
-                              backgroundColor: AppColors.cWhite,
-                              elevation: .0,
-                              systemOverlayStyle: SystemUiOverlayStyle(
-                                  statusBarBrightness: Brightness.dark,
-                                  statusBarIconBrightness: Brightness.dark,
-                                  statusBarColor: AppColors.cWhite),
-                              centerTitle: true,
-                              automaticallyImplyLeading: true,
-                              iconTheme: IconThemeData(color: AppColors.cPrimary),
-                              title: Text(
-                                listAvaiblesLocalInvoices[index][0],
-                                style: AppTextStyle.textStyle3(color: AppColors.cPrimary),
-                              ),
-                            ),
-                            backgroundColor: AppColors.cWhite,
-                            body: Column());
+                        return TemplateScreenDetails(
+                            templateName: listAvaiblesLocalInvoices[index][0],
+                            templateImage: listAvaiblesLocalInvoices[index][1],
+                            templateDesc: listAvaiblesLocalInvoices[index][2],
+                            isFavorite: listAvaiblesLocalInvoices[index][3]);
                       },
                     )))
       ],

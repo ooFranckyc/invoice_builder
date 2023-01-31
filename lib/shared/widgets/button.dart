@@ -26,7 +26,7 @@ class AppBtn extends StatelessWidget {
           backgroundColor: MaterialStatePropertyAll<Color>(color ?? Colors.white),
           elevation: const MaterialStatePropertyAll<double?>(0.0),
           padding: const MaterialStatePropertyAll<EdgeInsets>(
-              EdgeInsets.symmetric(vertical: 8, horizontal: 15))),
+              EdgeInsets.symmetric(vertical: 10, horizontal: 15))),
       onPressed: action,
       child: AppText(
         text: label,

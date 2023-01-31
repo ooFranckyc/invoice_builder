@@ -2,16 +2,17 @@ import 'package:get/get.dart';
 import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/screens/hom_screens/blinding.dart';
 import 'package:invoice_builder/screens/hom_screens/home_screen.dart';
-import 'package:invoice_builder/screens/invoice_screen/blinding.dart';
-import 'package:invoice_builder/screens/invoice_screen/invoice_screen.dart';
-import 'package:invoice_builder/screens/invoice_screen/screen_composite/business_compos/business_compos.dart';
-import 'package:invoice_builder/screens/invoice_screen/screen_composite/client_compos/client_compos.dart';
-import 'package:invoice_builder/screens/invoice_screen/screen_composite/items_compos/blinding.dart';
-import 'package:invoice_builder/screens/invoice_screen/screen_composite/items_compos/item_compos.dart';
-import 'package:invoice_builder/screens/invoice_screen/screen_composite/sign_usr_compos/sign_usr_compos.dart';
-import 'package:invoice_builder/screens/login_screen/login_screen.dart';
-import 'package:invoice_builder/screens/preview_screen/preview_screen.dart';
-import 'package:invoice_builder/screens/splash_screen/splash_screen.dart';
+import 'package:invoice_builder/screens/invoice_screens/blinding.dart';
+import 'package:invoice_builder/screens/invoice_screens/invoice_screen.dart';
+import 'package:invoice_builder/screens/invoice_screens/screen_composites/business_compos/business_compos.dart';
+import 'package:invoice_builder/screens/invoice_screens/screen_composites/client_compos/client_compos.dart';
+import 'package:invoice_builder/screens/invoice_screens/screen_composites/items_compos/blinding.dart';
+import 'package:invoice_builder/screens/invoice_screens/screen_composites/items_compos/item_compos.dart';
+import 'package:invoice_builder/screens/invoice_screens/screen_composites/sign_usr_compos/sign_usr_compos.dart';
+import 'package:invoice_builder/screens/login_screens/login_screen.dart';
+import 'package:invoice_builder/screens/notification_screen/notification_screen.dart';
+import 'package:invoice_builder/screens/preview_screens/preview_screen.dart';
+import 'package:invoice_builder/screens/splash_screens/splash_screen.dart';
 
 class AppRouting {
   static final routing = [
@@ -57,6 +58,11 @@ class AppRouting {
       name: AppLinks.preview,
       page: () => const PreviewScreen(),
       transition: Transition.fade,
+    ),
+    GetPage(
+      name: AppLinks.notification,
+      page: () => const NotificationScreen(),
+      transition: Transition.rightToLeft,
     ),
   ];
 }

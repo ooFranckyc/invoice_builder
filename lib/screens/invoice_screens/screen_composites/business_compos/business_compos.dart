@@ -12,6 +12,7 @@ import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
+import 'package:invoice_builder/shared/widgets/snackbar.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:invoice_builder/shared/widgets/text_field.dart';
 
@@ -132,6 +133,11 @@ class BusinessComposScreen extends StatelessWidget {
                         bool isValid = controller.validate();
                         if (isValid) {
                           Get.back();
+                        } else {
+                          messageWithSnackbar(
+                              context: context,
+                              message:
+                                  "Please Fill all the required fields for validate business sections.");
                         }
                       },
                       color: AppColors.cPrimary,

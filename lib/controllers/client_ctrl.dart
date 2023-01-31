@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/models/client.dart';
-import 'package:invoice_builder/shared/colors.dart';
 
 class ClientController extends GetxController {
   Client? client;
@@ -17,12 +16,6 @@ class ClientController extends GetxController {
         customerEmailInputController.text.isEmpty ||
         customerPhoneInputController.text.isEmpty ||
         customerAddressInputController.text.isEmpty) {
-      Get.snackbar("Error", "Please Fill all the required fields",
-          backgroundColor: AppColors.cPrimary.withOpacity(.85),
-          colorText: AppColors.cWhite,
-          animationDuration: const Duration(milliseconds: 400),
-          isDismissible: true,
-          snackPosition: SnackPosition.TOP);
       return false;
     } else {
       client = Client(

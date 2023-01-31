@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/models/invoice.dart';
-import 'package:invoice_builder/screens/preview_screen/pdf_gen_ai.dart';
+import 'package:invoice_builder/screens/preview_screens/pdf_gen_ai.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
