@@ -89,7 +89,7 @@ class InvoiceScreen extends StatelessWidget {
                   children: [
                     Center(
                         child: SvgPicture.asset('assets/images/Invoice-rafiki.svg',
-                            width: 200, height: 200, semanticsLabel: 'Acme Logo')),
+                            width: 200, height: 200, semanticsLabel: 'Invoice Start Logo')),
                     const SizedBox(height: 15.0),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),

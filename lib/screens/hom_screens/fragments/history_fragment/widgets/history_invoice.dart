@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/models/invoice.dart';
-import 'package:invoice_builder/screens/preview_screens/pdf_gen_ai.dart';
-import 'package:invoice_builder/services/invoice_doc_handler.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';

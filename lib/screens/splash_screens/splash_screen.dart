@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/services/authentification.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/style.dart';
@@ -27,10 +28,10 @@ class _SplashScreenState extends State<SplashScreen> {
     AuthentificationProvider authProvider = context.read<AuthentificationProvider>();
     bool isLoggedIn = await authProvider.isLoggedIn();
     if (isLoggedIn) {
-      Get.offAndToNamed('/home_screen');
+      Get.offAndToNamed(AppLinks.homeScreen);
       return;
     } else {
-      Get.offAndToNamed('/login_screen');
+      Get.offAndToNamed(AppLinks.onbordingScreen);
     }
   }
 

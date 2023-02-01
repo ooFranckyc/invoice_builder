@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/style.dart';
 
 class InvoiceCard extends StatefulWidget {
   final String title;
@@ -33,7 +33,7 @@ class _InvoiceCardState extends State<InvoiceCard> {
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(
                 widget.title,
-                style: TextStyle(color: AppColors.cPrimary, fontWeight: FontWeight.w500),
+                style: AppTextStyle.textStyle6(weight: FontWeight.w700),
               ),
             )
           ],

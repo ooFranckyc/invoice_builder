@@ -60,6 +60,7 @@ dependencies:
   google_sign_in: ^5.4.3
   provider: ^6.0.5
   smooth_page_indicator: ^1.0.0+2
+  flutter_onboarding_slider: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -103,9 +104,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Montserrat
+    - family: PTSerif
       fonts:
-        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/PTSerif-Regular.ttf
+        - asset: assets/fonts/PTSerif-Bold.ttf
           style: normal
   #   - family: Trajan Pro
   #     fonts:

@@ -20,13 +20,13 @@ class HomeFragment extends StatefulWidget {
 class _HomeFragmentState extends State<HomeFragment> {
   final defaultDuration = const Duration(milliseconds: 180);
   final preferences = SharedPreferences.getInstance();
-  String? fullname = 'Random User';
+  String username = 'Random User', profile = 'assets/google.png';
 
   getInfo() async {
     final SharedPreferences pref = await preferences;
-    final uname = (pref.getString(FirestoreConstantsKey.nickname));
+    final sharedName = (pref.getString(FirestoreConstantsKey.nickname));
     setState(() {
-      fullname = uname!;
+      username = sharedName!;
     });
   }
 
@@ -56,7 +56,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Hi, ${fullname!.split(' ')[0]}',
+            'Hi, ${username.split(' ')[0]}',
             style: AppTextStyle.textStyle1(),
           ),
           Text(

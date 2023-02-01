@@ -83,8 +83,8 @@ class _ProfileFragmentState extends State<ProfileFragment> {
           const SizedBox(height: 40.0),
           Bounce(
               duration: const Duration(milliseconds: 180),
-              onPressed: () async {
-                await authProvider.handleSignOut();
+              onPressed: () {
+                authProvider.handleSignOut();
                 Get.offAndToNamed('/login_screen');
                 messageWithSnackbar(context: context, message: 'Sign Out success !');
               },

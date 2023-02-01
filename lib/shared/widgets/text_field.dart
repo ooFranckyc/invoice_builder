@@ -28,7 +28,7 @@ class AppTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-        vertical: AutoDimensions.calcH(15),
+        vertical: AutoDimensions.calcH(10),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
