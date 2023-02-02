@@ -3,6 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/style.dart';
 
+/*
+  file name: template_screen.dart
+  ?params: name, imageUrl, description, favorite : Strings
+  
+*/
+
 class TemplateScreenDetails extends StatefulWidget {
   final String templateName;
   final String templateImage;

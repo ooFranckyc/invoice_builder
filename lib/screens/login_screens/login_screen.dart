@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
           actions: [
             GestureDetector(
                 onTap: () {
-                  exit(123); // ! Close authentificarion session with code 123
+                  exit(123); // ? Close authentificarion session with code 123
                 },
                 child: const Icon(Icons.close))
           ],
@@ -63,141 +63,144 @@ class _LoginScreenState extends State<LoginScreen> {
               statusBarColor: AppColors.cWhite,
               systemNavigationBarColor: AppColors.cWhite)),
       backgroundColor: AppColors.cWhite,
-      body: Center(
+      body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
-        padding: EdgeInsets.symmetric(vertical: AutoDimensions.calcH(28.0)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Welcome !',
-                style: AppTextStyle.textStyle0(),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                'Easy, Efficient and Productive.',
-                style: AppTextStyle.textStyle6(),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'Invoice creator allows you to build different invoices in a professional way with thousands of free templates. Log in and build invoices for your customers.',
-                style: AppTextStyle.textStyle5(color: AppColors.cPrimary.withOpacity(.70)),
-                textAlign: TextAlign.start,
-              ),
-              SizedBox(height: AutoDimensions.calcH(15)),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppTextFormField(
-                        label: 'Email', hint: 'hello@outlook.com', controller: emailController),
-                    AppTextFormField(
-                        label: 'Password', hint: 'You password', controller: passwordController),
-                    AppText(
-                      text: 'Forgot password?',
-                      style: AppTextStyle.textStyle4(weight: FontWeight.w700),
-                    ),
-                    const SizedBox(height: 20),
-                    Bounce(
-                      duration: const Duration(milliseconds: 190),
-                      onPressed: () async {},
-                      child: Container(
-                        height: AutoDimensions.calcH(60),
-                        padding: const EdgeInsets.all(15.0),
-                        margin: EdgeInsets.symmetric(horizontal: AutoDimensions.calcW(25)),
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: AppColors.cPrimary, borderRadius: BorderRadius.circular(12)),
-                        child: Text(
-                          'Login',
-                          style: AppTextStyle.textStyle3(
-                              weight: FontWeight.w600, color: AppColors.cWhite),
+            padding: EdgeInsets.symmetric(vertical: AutoDimensions.calcH(28.0)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Login !',
+                    style: AppTextStyle.textStyle0(),
+                  ),
+                  const SizedBox(
+                    height: 2,
+                  ),
+                  Text(
+                    'Easy, Efficient and Productive.',
+                    style: AppTextStyle.textStyle6(),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Invoice creator allows you to build different invoices in a professional way with thousands of free templates. Log in and build invoices for your customers.',
+                    style: AppTextStyle.textStyle5(color: AppColors.cPrimary.withOpacity(.70)),
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(height: AutoDimensions.calcH(15)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppTextFormField(
+                            label: 'Email', hint: 'hello@outlook.com', controller: emailController),
+                        AppTextFormField(
+                            label: 'Password',
+                            hint: 'You password',
+                            controller: passwordController),
+                        AppText(
+                          text: 'Forgot password?',
+                          style: AppTextStyle.textStyle4(weight: FontWeight.w700),
                         ),
+                        const SizedBox(height: 20),
+                        Bounce(
+                          duration: const Duration(milliseconds: 190),
+                          onPressed: () async {},
+                          child: Container(
+                            height: AutoDimensions.calcH(60),
+                            padding: const EdgeInsets.all(15.0),
+                            margin: EdgeInsets.symmetric(horizontal: AutoDimensions.calcW(25)),
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: AppColors.cPrimary, borderRadius: BorderRadius.circular(12)),
+                            child: Text(
+                              'Login',
+                              style: AppTextStyle.textStyle3(
+                                  weight: FontWeight.w600, color: AppColors.cWhite),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                  Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Or',
+                        style: AppTextStyle.textStyle4(weight: FontWeight.w700),
+                      )),
+                  Bounce(
+                    duration: const Duration(milliseconds: 190),
+                    onPressed: () async {
+                      bool success = await authProvider.handleSignIn();
+                      if (success) {
+                        Get.offAndToNamed(AppLinks.homeScreen);
+                      }
+                    },
+                    child: Container(
+                      height: AutoDimensions.calcH(60),
+                      padding: const EdgeInsets.all(15.0),
+                      margin: EdgeInsets.symmetric(horizontal: AutoDimensions.calcW(60)),
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: AppColors.cWhite,
+                          //border: Border.all(width: .5, color: AppColors.cPrimary),
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/google.png', width: 40, height: 40),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Continue with Google',
+                            style: AppTextStyle.textStyle5(weight: FontWeight.normal),
+                          )
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10.0),
-              Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Or',
-                    style: AppTextStyle.textStyle4(weight: FontWeight.w700),
-                  )),
-              Bounce(
-                duration: const Duration(milliseconds: 190),
-                onPressed: () async {
-                  bool success = await authProvider.handleSignIn();
-                  if (success) {
-                    Get.offAndToNamed(AppLinks.homeScreen);
-                  }
-                },
-                child: Container(
-                  height: AutoDimensions.calcH(60),
-                  padding: const EdgeInsets.all(15.0),
-                  margin: EdgeInsets.symmetric(horizontal: AutoDimensions.calcW(60)),
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: AppColors.cWhite,
-                      //border: Border.all(width: .5, color: AppColors.cPrimary),
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/google.png', width: 40, height: 40),
-                      const SizedBox(width: 5),
-                      Text(
-                        'Continue with Google',
-                        style: AppTextStyle.textStyle5(weight: FontWeight.normal),
-                      )
-                    ],
                   ),
-                ),
-              ),
-              const SizedBox(height: 10.0),
-              Bounce(
-                duration: const Duration(milliseconds: 190),
-                onPressed: () async {
-                  //Apple Sign In code
-                },
-                child: Container(
-                  height: AutoDimensions.calcH(60),
-                  padding: const EdgeInsets.all(15.0),
-                  margin: EdgeInsets.symmetric(horizontal: AutoDimensions.calcW(60)),
-                  alignment: Alignment.center,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: AppColors.cWhite,
-                      //border: Border.all(width: .5, color: AppColors.cPrimary),
-                      borderRadius: BorderRadius.circular(12)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/apple.png', width: 40, height: 40),
-                      const SizedBox(width: 5),
-                      Text(
-                        'Continue with Apple',
-                        style: AppTextStyle.textStyle6(weight: FontWeight.normal),
-                      )
-                    ],
+                  const SizedBox(height: 10.0),
+                  Bounce(
+                    duration: const Duration(milliseconds: 190),
+                    onPressed: () async {
+                      //Apple Sign In code
+                    },
+                    child: Container(
+                      height: AutoDimensions.calcH(60),
+                      padding: const EdgeInsets.all(15.0),
+                      margin: EdgeInsets.symmetric(horizontal: AutoDimensions.calcW(60)),
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: AppColors.cWhite,
+                          //border: Border.all(width: .5, color: AppColors.cPrimary),
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/apple.png', width: 40, height: 40),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Continue with Apple',
+                            style: AppTextStyle.textStyle6(weight: FontWeight.normal),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ),
-      )),
+            ),
+          )),
     );
   }
 }

@@ -11,6 +11,17 @@ import 'package:invoice_builder/shared/widgets/rich_text.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:invoice_builder/shared/widgets/text_field.dart';
 
+/*
+  file name: item_compos.dart
+  Un ecouteur d'evenement est mis le plus haut possible pour notifier flutter,
+  d'operer une construction(re) de widgets : NotificationListerner.
+  items_compo.dart cree un ecran, qui affichera la progression d'ajout d'element 
+  constituant la facture de l'utilisateur, ces infomations sont ensuite modeliser 
+  et rendu graphiquement grace au widget approprier.
+  ? Emplacement du fichier: $/widgets/table_represent_data.dart
+  Pour bien comprendre le code suivant: vous devez comprendre getx...😁
+*/
+
 class ItemCompoScreen extends GetView<ItemsController> {
   @override
   final controller = Get.find<ItemsController>();
@@ -19,7 +30,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: invoiceBuildAppBar(title: 'Wrtie items', actions: [], showBackButton: true),
+      appBar: invoiceBuildAppBar(title: 'Manage Product Items', actions: [], showBackButton: true),
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (scroll) {
@@ -130,10 +141,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                             children: [
                               Text(
                                 "You did not add any item yet!",
-                                style: TextStyle(
-                                    color: AppColors.cPrimary,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700),
+                                style: AppTextStyle.textStyle2(),
                               ),
                               const SizedBox(height: 5),
                               Row(
@@ -142,20 +150,17 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                 children: [
                                   Text(
                                     "Please press ",
-                                    style: TextStyle(
-                                        color: AppColors.cPrimary,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal),
+                                    style: AppTextStyle.textStyle4(),
                                     textAlign: TextAlign.center,
                                   ),
-                                  const Icon(CupertinoIcons.square_list),
+                                  Icon(
+                                    CupertinoIcons.square_list,
+                                    color: AppColors.cPrimary,
+                                  ),
                                   Text(
                                     "button for add new item.",
                                     maxLines: 2,
-                                    style: TextStyle(
-                                        color: AppColors.cPrimary,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.normal),
+                                    style: AppTextStyle.textStyle4(),
                                   )
                                 ],
                               ),

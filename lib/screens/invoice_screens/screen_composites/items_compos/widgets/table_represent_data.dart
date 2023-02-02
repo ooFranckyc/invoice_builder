@@ -1,4 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, avoid_print
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/items_ctrl.dart';
@@ -53,10 +55,6 @@ TableRow TableDataRepresentation({required Item? item}) {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColors.cPrimary,
-                ),
                 alignment: Alignment.center,
                 height: 30,
                 width: 30,
@@ -82,7 +80,9 @@ TableRow TableDataRepresentation({required Item? item}) {
                   splashRadius: 18,
                   padding: const EdgeInsets.all(0),
                   onPressed: () {
-                    (item != null) ? controller.removeItem(item: item) : print("null");
+                    (item != null)
+                        ? controller.removeItem(item: item)
+                        : log("Failed to remove null item");
                   },
                   icon: const Icon(
                     Icons.delete_sharp,

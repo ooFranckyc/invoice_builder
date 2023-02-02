@@ -2,7 +2,7 @@ class AppLinks {
   static const String splashScreen = "/";
   static const String homeScreen = "/home_screen";
   static const String loginScreen = "/login_screen";
-  static const String registerScreen = "/login_screen";
+  static const String registerScreen = "/register_screen";
   static const String newInvoiceScreen = "/new_invoice";
   static const String newBuisinessScreen = "/add_business";
   static const String newClientScreen = "/add_client";
