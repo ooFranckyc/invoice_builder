@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/searchbar.dart';
 
@@ -17,7 +18,15 @@ class _TemplateFragmentState extends State<TemplateFragment> {
       children: [
         _headerUserInformation(),
         const InvoiceSearchBar(),
-        // you can user listview widget for show result search invoice in this screen
+        const SizedBox(height: 30),
+        /*
+          L'affichage des resultas de recherche de fature doit etre asynchrone,
+          pour ce faire nous utiliserons un FutureBuilder(args), qui aura comme methodes future "findInvoiceByTag(String tag) async",
+          nous construirons ensuite une liste de widgets avec un modeliseurs pour avoir un rendu graphique a l'ecran.
+          La methodes retournera donc des informations concernant la fature actuel (currentInvoice),
+          qui sera afficher dans un ecran dedier a la consultations d'information, cet ecran permettra de directement utiliser le models
+          voir: lib/templates_screens/template_screen.dart
+        */
       ],
     );
   }
@@ -29,11 +38,11 @@ class _TemplateFragmentState extends State<TemplateFragment> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Search Templates',
+            AppStrings.searchInvoiceTextTemplateFragment,
             style: AppTextStyle.textStyle1(),
           ),
           Text(
-            'You can use a free template for you invoice.',
+            AppStrings.searchInvoiceTextDescTemplateFragment,
             style: AppTextStyle.textStyle5(),
           ),
         ],

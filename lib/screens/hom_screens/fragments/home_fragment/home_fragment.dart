@@ -2,10 +2,12 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:get/get.dart';
+import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/widgets/invoice_card.dart';
 import 'package:invoice_builder/screens/templates_screens/template_screen.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/searchbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,7 +22,7 @@ class HomeFragment extends StatefulWidget {
 class _HomeFragmentState extends State<HomeFragment> {
   final defaultDuration = const Duration(milliseconds: 180);
   final preferences = SharedPreferences.getInstance();
-  String username = 'Random User', profile = 'assets/google.png';
+  String username = AppStrings.defaultUsername, profile = AppStrings.defaultProfileImage;
 
   getInfo() async {
     final SharedPreferences pref = await preferences;
@@ -56,11 +58,11 @@ class _HomeFragmentState extends State<HomeFragment> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Hi, ${username.split(' ')[0]}',
+            '${AppStrings.hiMsgHomePageOption}${username.split(' ')[0]}',
             style: AppTextStyle.textStyle1(),
           ),
           Text(
-            'Let\'s build new invoice',
+            AppStrings.belowTextWl,
             style: AppTextStyle.textStyle5(),
           ),
         ],
@@ -81,7 +83,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               Padding(
                 padding: const EdgeInsets.only(right: 50, left: 20, top: 15),
                 child: Text(
-                  'Generate Invoice By Following Just Few Steps !',
+                  AppStrings.tipsTextHomeFragment,
                   style: AppTextStyle.textStyle1(),
                 ),
               ),
@@ -96,10 +98,10 @@ class _HomeFragmentState extends State<HomeFragment> {
                             EdgeInsets.symmetric(vertical: 8, horizontal: 15)),
                         splashFactory: NoSplash.splashFactory),
                     onPressed: () {
-                      Get.toNamed("/new_invoice");
+                      Get.toNamed(AppLinks.registerScreen);
                     },
                     child: Text(
-                      'Generate News',
+                      AppStrings.genInvoiceHomeFragment,
                       style: AppTextStyle.textStyle3(color: AppColors.cWhite),
                     )),
               )
@@ -123,6 +125,10 @@ class _HomeFragmentState extends State<HomeFragment> {
     );
   }
 
+  // Facture local de conception, s'il vous plait, si, a ce moment de developpement
+  // De l'application, le service de reception de facture modeliser depuis firebase n'est pas encore
+  // Operationel, veuillez si vous en etes capable vous en occuper !
+  // ? contact: ed.franckmekoulou@outlook.com
   final listAvaiblesLocalInvoices = [
     [
       'Abstract Black',
@@ -177,8 +183,18 @@ class _HomeFragmentState extends State<HomeFragment> {
   Widget _usingPopularInvoice() {
     return Column(
       children: [
-        _templateUI(title: 'Popular Templates', action: 'View All', onPress: () {}),
+        _templateUI(
+            title: AppStrings.popularTempHomeFragment,
+            action: AppStrings.viewAllHomeFragment,
+            onPress: () {}),
         const SizedBox(height: 10.0),
+        /*
+          A ce niveau, lorsque le service de reception & de modelisation de facture venant 
+          de firebase sera operationel, l'utilisation d'un ListView.builder(args), ne sera pas utilse,
+          car nous serrions en situation d'ou du code asynchrone serait un moyen d'eviter les bugs d'attente vis a vis,
+          des processus de notre app, ou du systeme.
+          Le widget recommande est FutureBuilder(args) -> a venir 
+        */
         SizedBox(
             height: 230,
             child: ListView.builder(
@@ -208,7 +224,10 @@ class _HomeFragmentState extends State<HomeFragment> {
   Widget _lastTemplateUsed() {
     return Column(
       children: [
-        _templateUI(title: 'Last used Templates', action: 'View All', onPress: () {}),
+        _templateUI(
+            title: AppStrings.lastTempUsedHomeFragment,
+            action: AppStrings.viewAllHomeFragment,
+            onPress: () {}),
         const SizedBox(
           height: 30.0,
         ),
@@ -224,13 +243,16 @@ class _HomeFragmentState extends State<HomeFragment> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            'No Template Yet',
+            AppStrings.nothinTempUsedTitleHomeFragment,
             style: AppTextStyle.textStyle4(),
           ),
-          Text(
-            'Please create invoice using one template, there showing here',
-            style: AppTextStyle.textStyle6(color: AppColors.cPrimary.withOpacity(.70)),
-            textAlign: TextAlign.center,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Text(
+              AppStrings.nothinTempUsedDescriptionHomeFragment,
+              style: AppTextStyle.textStyle6(color: AppColors.cPrimary.withOpacity(.70)),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

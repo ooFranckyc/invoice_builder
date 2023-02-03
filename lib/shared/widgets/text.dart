@@ -9,6 +9,7 @@ class AppText extends StatelessWidget {
   final TextAlign align;
   final TextDirection? textdirection;
   final TextOverflow? overflow;
+  final TextDecoration? decoration;
   final TextStyle? style;
   final int maxline;
   const AppText({
@@ -19,6 +20,7 @@ class AppText extends StatelessWidget {
     this.color = Colors.black,
     this.align = TextAlign.center,
     this.overflow,
+    this.decoration,
     this.textdirection,
     this.style,
     Key? key,
@@ -50,7 +52,7 @@ class AppText extends StatelessWidget {
       overflow: overflow ?? TextOverflow.ellipsis,
       textDirection: textdirection ?? TextDirection.ltr,
       textAlign: align,
-      style: style ?? AppTextStyle.textStyle3(color: color),
+      style: style ?? AppTextStyle.textStyle3(color: color, decoration: decoration),
     );
   }
 }

@@ -1,9 +1,9 @@
-class Client {
+class Customer {
   String name;
   String address;
   String phone;
   String email;
-  Client({
+  Customer({
     required this.name,
     required this.address,
     required this.phone,

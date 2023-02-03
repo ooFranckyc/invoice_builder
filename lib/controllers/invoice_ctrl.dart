@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:invoice_builder/models/business.dart';
-import 'package:invoice_builder/models/client.dart';
+import 'package:invoice_builder/models/customer.dart';
 import 'package:invoice_builder/models/invoice.dart';
 import 'package:invoice_builder/models/item.dart';
 import 'package:invoice_builder/services/invoice_doc_handler.dart';
@@ -9,7 +9,7 @@ import 'package:invoice_builder/services/invoice_doc_handler.dart';
 class InvoiceController extends GetxController {
   String id = "0";
   Business? business;
-  Client? client;
+  Customer? client;
   RxList<Item> itemsList = <Item>[].obs;
   String? paymentInstructions;
   Uint8List? logo;
@@ -22,7 +22,7 @@ class InvoiceController extends GetxController {
     });
   }
 
-  void setCustomer(Client val) async {
+  void setCustomer(Customer val) async {
     client = val;
     await Future.delayed(const Duration(milliseconds: 20), () {
       update();

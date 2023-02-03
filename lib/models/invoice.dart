@@ -1,13 +1,13 @@
 import 'package:flutter/services.dart';
 import 'package:invoice_builder/models/business.dart';
-import 'package:invoice_builder/models/client.dart';
+import 'package:invoice_builder/models/customer.dart';
 import 'package:invoice_builder/models/item.dart';
 
 class Invoice {
   String id;
   String date;
   Business from;
-  Client to;
+  Customer to;
   List<Item> items;
   String paymentInstructions;
   double total;

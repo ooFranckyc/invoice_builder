@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 
@@ -59,7 +60,7 @@ class OptionView extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: SvgPicture.asset(
-                        "assets/icons/success_circle.svg",
+                        AppStrings.doneArgumentIcons,
                         height: 25,
                         width: 25,
                         color: Colors.green[600],

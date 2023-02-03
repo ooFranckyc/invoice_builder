@@ -8,8 +8,10 @@ import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/services/authentification.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
+import 'package:invoice_builder/shared/widgets/snackbar.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:invoice_builder/shared/widgets/text_field.dart';
 import 'package:provider/provider.dart';
@@ -31,17 +33,20 @@ class _LoginScreenState extends State<LoginScreen> {
       case AuthentificationStatus.authentificateError:
         Get.showSnackbar(GetSnackBar(
           backgroundColor: AppColors.cPrimary,
-          message: 'Failed Autentification',
+          message: AppStrings.authentificationMessage[0],
         ));
         break;
       case AuthentificationStatus.authentificateCanceled:
         Get.showSnackbar(GetSnackBar(
           backgroundColor: AppColors.cPrimary,
-          message: 'Autentification has canceled',
+          message: AppStrings.authentificationMessage[1],
         ));
         break;
       case AuthentificationStatus.authentificated:
-        //notify user
+        messageWithSnackbar(
+            context: context,
+            message: AppStrings.authentificationMessage[2],
+            color: Colors.blue.shade600);
         break;
       default:
     }
@@ -62,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               statusBarIconBrightness: Brightness.dark,
               statusBarColor: AppColors.cWhite,
               systemNavigationBarColor: AppColors.cWhite)),
-      backgroundColor: AppColors.cWhite,
+      //backgroundColor: AppColors.cWhite,
       body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -74,19 +79,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Login !',
+                    AppStrings.textTitleLoginScreen,
                     style: AppTextStyle.textStyle0(),
+                    maxLines: 2,
                   ),
                   const SizedBox(
                     height: 2,
                   ),
                   Text(
-                    'Easy, Efficient and Productive.',
+                    AppStrings.textSubtitleLoginScreen,
                     style: AppTextStyle.textStyle6(),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Invoice creator allows you to build different invoices in a professional way with thousands of free templates. Log in and build invoices for your customers.',
+                    AppStrings.textDescLoginScreen,
                     style: AppTextStyle.textStyle5(color: AppColors.cPrimary.withOpacity(.70)),
                     textAlign: TextAlign.start,
                   ),
@@ -97,13 +103,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppTextFormField(
-                            label: 'Email', hint: 'hello@outlook.com', controller: emailController),
+                            label: AppStrings.textLoginEmail,
+                            hint: AppStrings.textLoginEmailHint,
+                            controller: emailController),
                         AppTextFormField(
-                            label: 'Password',
-                            hint: 'You password',
+                            label: AppStrings.textLoginPassword,
+                            hint: AppStrings.textLoginPasswordHint,
                             controller: passwordController),
                         AppText(
-                          text: 'Forgot password?',
+                          text: AppStrings.textForgotLoginPassword,
                           style: AppTextStyle.textStyle4(weight: FontWeight.w700),
                         ),
                         const SizedBox(height: 20),
@@ -118,10 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 color: AppColors.cPrimary, borderRadius: BorderRadius.circular(12)),
-                            child: Text(
-                              'Login',
+                            child: AppText(
+                              text: AppStrings.textLoginBtn,
                               style: AppTextStyle.textStyle3(
-                                  weight: FontWeight.w600, color: AppColors.cWhite),
+                                  weight: FontWeight.w700, color: AppColors.cWhite),
                             ),
                           ),
                         ),
@@ -131,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 10.0),
                   Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        'Or',
+                      child: AppText(
+                        text: AppStrings.textOrLogin,
                         style: AppTextStyle.textStyle4(weight: FontWeight.w700),
                       )),
                   Bounce(
@@ -157,10 +165,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/google.png', width: 40, height: 40),
+                          Image.asset(AppStrings.googleImage, width: 40, height: 40),
                           const SizedBox(width: 5),
                           Text(
-                            'Continue with Google',
+                            AppStrings.textWithGoogle,
                             style: AppTextStyle.textStyle5(weight: FontWeight.normal),
                           )
                         ],
@@ -187,10 +195,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/apple.png', width: 40, height: 40),
+                          Image.asset(AppStrings.appleImage, width: 40, height: 40),
                           const SizedBox(width: 5),
                           Text(
-                            'Continue with Apple',
+                            AppStrings.textWithApple,
                             style: AppTextStyle.textStyle6(weight: FontWeight.normal),
                           )
                         ],

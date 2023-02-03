@@ -5,6 +5,7 @@ import 'package:invoice_builder/controllers/items_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/screens/invoice_screens/screen_composites/items_compos/widgets/table_represent_data.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
 import 'package:invoice_builder/shared/widgets/rich_text.dart';
@@ -19,7 +20,7 @@ import 'package:invoice_builder/shared/widgets/text_field.dart';
   constituant la facture de l'utilisateur, ces infomations sont ensuite modeliser 
   et rendu graphiquement grace au widget approprier.
   ? Emplacement du fichier: $/widgets/table_represent_data.dart
-  Pour bien comprendre le code suivant: vous devez comprendre getx...😁
+  Pour bien comprendre le code suivant: vous devez comprendre getx...👌
 */
 
 class ItemCompoScreen extends GetView<ItemsController> {
@@ -30,7 +31,8 @@ class ItemCompoScreen extends GetView<ItemsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: invoiceBuildAppBar(title: 'Manage Product Items', actions: [], showBackButton: true),
+      appBar: invoiceBuildAppBar(
+          title: AppStrings.textTitleItemsComposite, actions: [], showBackButton: true),
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (scroll) {
@@ -57,7 +59,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                               children: <Widget>[
                                 TableCell(
                                   child: Tooltip(
-                                    message: 'Item Name',
+                                    message: AppStrings.tooltipItemsCompositeCellname,
                                     showDuration: const Duration(seconds: 2),
                                     decoration: BoxDecoration(
                                         color: AppColors.cPrimary,
@@ -65,7 +67,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                     child: Container(
                                       padding: const EdgeInsets.all(8),
                                       child: AppText(
-                                        text: 'Name',
+                                        text: AppStrings.textTitleCellnameItemsComposite,
                                         style: AppTextStyle.textStyle5(weight: FontWeight.w600),
                                       ),
                                     ),
@@ -73,7 +75,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                 ),
                                 TableCell(
                                   child: Tooltip(
-                                    message: 'Item Price',
+                                    message: AppStrings.textTitleCellPriceItemsComposite,
                                     showDuration: const Duration(seconds: 2),
                                     decoration: BoxDecoration(
                                         color: AppColors.cPrimary,
@@ -81,7 +83,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                     child: Container(
                                       padding: const EdgeInsets.all(8),
                                       child: AppText(
-                                        text: 'Item Price',
+                                        text: AppStrings.textTitleCellPriceItemsComposite,
                                         style: AppTextStyle.textStyle5(weight: FontWeight.w600),
                                       ),
                                     ),
@@ -89,7 +91,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                 ),
                                 TableCell(
                                   child: Tooltip(
-                                    message: 'Quantity',
+                                    message: AppStrings.textTitleCellQuantityItemsComposite,
                                     showDuration: const Duration(seconds: 2),
                                     decoration: BoxDecoration(
                                         color: AppColors.cPrimary,
@@ -97,7 +99,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                     child: Container(
                                       padding: const EdgeInsets.all(8),
                                       child: AppText(
-                                        text: 'Quantity',
+                                        text: AppStrings.textTitleCellQuantityItemsComposite,
                                         style: AppTextStyle.textStyle5(weight: FontWeight.w600),
                                       ),
                                     ),
@@ -105,7 +107,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                 ),
                                 TableCell(
                                   child: Tooltip(
-                                    message: 'Edit/Delete',
+                                    message: AppStrings.textTitleCellEditDeleteItemsComposite,
                                     showDuration: const Duration(seconds: 2),
                                     decoration: BoxDecoration(
                                         color: AppColors.cPrimary,
@@ -113,7 +115,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                     child: Container(
                                       padding: const EdgeInsets.all(8),
                                       child: AppText(
-                                        text: 'Actions',
+                                        text: AppStrings.textTitleCellActionsItemsComposite,
                                         style: AppTextStyle.textStyle5(weight: FontWeight.w600),
                                       ),
                                     ),
@@ -122,9 +124,8 @@ class ItemCompoScreen extends GetView<ItemsController> {
                               ],
                             ),
                             ...controller.itemsList
-                                .map((itemx) => TableDataRepresentation(
-                                      item: itemx,
-                                    ))
+                                .map((itemx) =>
+                                    TableDataRepresentation(item: itemx, context: context))
                                 .toList(),
                           ],
                         ),
@@ -140,7 +141,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                "You did not add any item yet!",
+                                AppStrings.textTitleNoInvoiceBuildItemsComposite,
                                 style: AppTextStyle.textStyle2(),
                               ),
                               const SizedBox(height: 5),
@@ -149,7 +150,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Please press ",
+                                    AppStrings.textTitleNoInvoiceBuildConIItemsComposite,
                                     style: AppTextStyle.textStyle4(),
                                     textAlign: TextAlign.center,
                                   ),
@@ -158,7 +159,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                                     color: AppColors.cPrimary,
                                   ),
                                   Text(
-                                    "button for add new item.",
+                                    AppStrings.textTitleNoInvoiceBuildConIIItemsComposite,
                                     maxLines: 2,
                                     style: AppTextStyle.textStyle4(),
                                   )
@@ -177,7 +178,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: AppRichText(
-                          text: "Total: \$",
+                          text: "${AppStrings.totalText}\$",
                           style: AppTextStyle.textStyle4(weight: FontWeight.w500),
                           children: [
                             TextSpan(text: "${controller.total.value.toStringAsFixed(2)}")
@@ -195,7 +196,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
         onPressed: () async {
           await Get.defaultDialog(
             radius: 12,
-            title: 'New Items',
+            title: AppStrings.newItemText,
             titlePadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             contentPadding: EdgeInsets.zero,
             content: SingleChildScrollView(
@@ -205,20 +206,20 @@ class ItemCompoScreen extends GetView<ItemsController> {
                   children: [
                     const Divider(),
                     AppTextFormField(
-                      label: "Item name",
+                      label: AppStrings.tooltipItemsCompositeCellname,
                       controller: controller.itemNameInputController,
                       isRequired: true,
                       style: AppTextStyle.textStyle3(weight: FontWeight.w500),
                     ),
                     AppTextFormField(
-                      label: 'Item Price',
+                      label: AppStrings.textTitleCellPriceItemsComposite,
                       controller: controller.itemPriceInputController,
                       type: TextInputType.number,
                       isRequired: true,
                       style: AppTextStyle.textStyle3(weight: FontWeight.w500),
                     ),
                     AppTextFormField(
-                      label: 'Quantity',
+                      label: AppStrings.textTitleCellQuantityItemsComposite,
                       controller: controller.itemQtyInputController,
                       type: TextInputType.number,
                       isRequired: true,

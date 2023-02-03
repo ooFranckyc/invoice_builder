@@ -11,6 +11,7 @@ import 'package:invoice_builder/screens/hom_screens/fragments/profile_fragment/p
 import 'package:invoice_builder/screens/hom_screens/fragments/template_fragment/template_fragment.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_appbar.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -50,7 +51,7 @@ class _MenuScreenState extends State<MenuScreen> {
   final defaultDuration = const Duration(milliseconds: 180);
   int currentIndex = 0;
   final preferences = SharedPreferences.getInstance();
-  String username = 'Random User', profile = 'assets/google.png';
+  String username = AppStrings.defaultUsername, profile = AppStrings.defaultProfileImage;
 
   getInfo() async {
     final SharedPreferences pref = await preferences;
@@ -99,7 +100,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       ZoomDrawer.of(context)!.toggle();
                     },
                     child: optionMenuTitle(
-                        title: 'Home Page',
+                        title: AppStrings.homePageOption,
                         icon: CupertinoIcons.home,
                         isCurrent: currentIndex == 0 ? true : false)),
                 Bounce(
@@ -111,7 +112,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
-                      title: 'Templates',
+                      title: AppStrings.templateHomePageOption,
                       icon: CupertinoIcons.photo,
                       isCurrent: currentIndex == 1 ? true : false),
                 ),
@@ -124,7 +125,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
-                      title: 'Notifications',
+                      title: AppStrings.notificationHomePageOption,
                       icon: CupertinoIcons.bell,
                       isCurrent: currentIndex == 2 ? true : false),
                 ),
@@ -137,7 +138,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
-                      title: 'Rate US',
+                      title: AppStrings.rateUSHomePageOption,
                       icon: CupertinoIcons.wand_stars_inverse,
                       isCurrent: currentIndex == 3 ? true : false),
                 ),
@@ -150,7 +151,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
-                      title: 'Help Center',
+                      title: AppStrings.helpCenterHomePageOption,
                       icon: Icons.help_outline,
                       isCurrent: currentIndex == 4 ? true : false),
                 ),
@@ -163,7 +164,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ZoomDrawer.of(context)!.toggle();
                   },
                   child: optionMenuTitle(
-                      title: 'Sign Out',
+                      title: AppStrings.signOutHomePageOption,
                       icon: Icons.logout,
                       isCurrent: currentIndex == 5 ? true : false),
                 ),
@@ -193,10 +194,6 @@ class _MenuScreenState extends State<MenuScreen> {
           Text(
             title,
             style: AppTextStyle.textStyle5(color: AppColors.cWhite.withOpacity(.80)),
-            // style: TextStyle(
-            //     color: AppColors.cWhite.withOpacity(.80),
-            //     fontSize: 16.3,
-            //     fontWeight: FontWeight.w700),
           )
         ],
       ),
@@ -223,10 +220,11 @@ class _MenuScreenState extends State<MenuScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hi, ${username.split(' ')[0]}',
+                '${AppStrings.hiMsgHomePageOption}${username.split(' ')[0]}', // return the first name of username -> "Hi, Franck" for example
                 style: AppTextStyle.textStyle2(color: AppColors.cWhite),
               ),
-              Text('Welcome.', style: AppTextStyle.textStyle4(color: AppColors.cWhite)),
+              Text(AppStrings.welcomeTextHomePageOption,
+                  style: AppTextStyle.textStyle4(color: AppColors.cWhite)),
             ],
           )
         ],
@@ -280,29 +278,29 @@ class _MainScreenState extends State<MainScreen> {
             },
             items: [
               PersistentBottomNavBarItem(
-                  activeColorPrimary: Colors.black,
-                  title: 'Home',
+                  activeColorPrimary: AppColors.cPrimary,
+                  title: AppStrings.homeTextNavigation,
                   textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     CupertinoIcons.home,
                   )),
               PersistentBottomNavBarItem(
-                  activeColorPrimary: Colors.black,
-                  title: 'Templates',
+                  activeColorPrimary: AppColors.cPrimary,
+                  title: AppStrings.templatesTextNavigation,
                   textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     CupertinoIcons.doc_text_search,
                   )),
               PersistentBottomNavBarItem(
-                  activeColorPrimary: Colors.black,
-                  title: 'History',
+                  activeColorPrimary: AppColors.cPrimary,
+                  title: AppStrings.historyTextNavigation,
                   textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     Icons.history,
                   )),
               PersistentBottomNavBarItem(
-                  activeColorPrimary: Colors.black,
-                  title: 'Profile',
+                  activeColorPrimary: AppColors.cPrimary,
+                  title: AppStrings.profileTextNavigation,
                   textStyle: AppTextStyle.textStyle6(weight: FontWeight.w600),
                   icon: const Icon(
                     CupertinoIcons.profile_circled,

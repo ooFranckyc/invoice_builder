@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:get/get.dart';
+import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/services/authentification.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/style.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/widgets/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +20,9 @@ class ProfileFragment extends StatefulWidget {
 
 class _ProfileFragmentState extends State<ProfileFragment> {
   final preferences = SharedPreferences.getInstance();
-  String fullname = 'Random User', profileImg = 'assets/google.png', email = "@user";
+  String fullname = AppStrings.defaultUsername,
+      profileImg = AppStrings.defaultProfileImage,
+      email = AppStrings.defaultNotifEmail;
 
   getInfo() async {
     final SharedPreferences pref = await preferences;
@@ -66,7 +70,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 5.0, bottom: 8),
-                  child: Image.asset('assets/google.png', width: 25, height: 25),
+                  child: Image.asset(AppStrings.googleImage, width: 25, height: 25),
                 ),
               ],
             ),
@@ -85,7 +89,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
               duration: const Duration(milliseconds: 180),
               onPressed: () {
                 authProvider.handleSignOut();
-                Get.offAndToNamed('/login_screen');
+                Get.offAndToNamed(AppLinks.loginScreen);
                 messageWithSnackbar(context: context, message: 'Sign Out success !');
               },
               child: Text('Sign Out', style: AppTextStyle.textStyle3()))

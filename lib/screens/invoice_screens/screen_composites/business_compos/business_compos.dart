@@ -9,6 +9,7 @@ import 'package:invoice_builder/controllers/business_ctrl.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
@@ -18,12 +19,11 @@ import 'package:invoice_builder/shared/widgets/text_field.dart';
 
 class BusinessComposScreen extends StatelessWidget {
   const BusinessComposScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: invoiceBuildAppBar(
-        title: 'Add Business',
+        title: AppStrings.textTitleBusinessComposite,
         actions: [],
         showBackButton: true,
       ),
@@ -50,28 +50,28 @@ class BusinessComposScreen extends StatelessWidget {
                         children: [
                           AppTextFormField(
                             controller: controller.businessNameInputController,
-                            label: 'Business Name',
+                            label: AppStrings.textBssTitleNameComposite,
                             isRequired: true,
-                            hint: 'Type you name business',
+                            hint: AppStrings.textBssTitleNameHintComposite,
                           ),
                           AppTextFormField(
                             controller: controller.businessEmailInputController,
-                            label: 'Email Address',
-                            hint: '@outlook.com | @gmail.com',
+                            label: AppStrings.textBssTitleEmailComposite,
+                            hint: AppStrings.textBssTitleEmailHintComposite,
                             isRequired: true,
                             type: TextInputType.emailAddress,
                           ),
                           AppTextFormField(
                             controller: controller.businessPhoneInputController,
-                            label: 'Phone Number',
-                            hint: 'eg. +237 000 000 000 ',
+                            label: AppStrings.textBssTitlePhoneNumberComposite,
+                            hint: AppStrings.textBssTitlePhoneNumberHintComposite,
                             isRequired: true,
                             type: TextInputType.phone,
                           ),
                           AppTextFormField(
                             controller: controller.businessAddressInputController,
-                            label: 'Address',
-                            hint: 'You location address',
+                            label: AppStrings.textBssTitleAddressComposite,
+                            hint: AppStrings.textBssTitleAddressHintComposite,
                             height: AutoDimensions.calcH(100),
                             isRequired: true,
                           ),
@@ -115,7 +115,7 @@ class BusinessComposScreen extends StatelessWidget {
                                       ),
                                     ),
                                     AppText(
-                                      text: "Pick your logo",
+                                      text: AppStrings.textBssTitlePicLogoComposite,
                                       color: AppColors.cPrimary,
                                       style: AppTextStyle.textStyle5(),
                                     )
@@ -128,20 +128,18 @@ class BusinessComposScreen extends StatelessWidget {
                       height: AutoDimensions.calcH(50),
                     ),
                     AppBtn(
-                      label: 'Save',
+                      label: AppStrings.textSaveBtn,
                       action: () {
                         bool isValid = controller.validate();
                         if (isValid) {
                           Get.back();
                         } else {
                           messageWithSnackbar(
-                              context: context,
-                              message:
-                                  "Please Fill all the required fields for validate business sections.");
+                              context: context, message: AppStrings.businessErrorScreenText);
                         }
                       },
                       color: AppColors.cPrimary,
-                      textColor: Colors.white,
+                      textColor: AppColors.cWhite,
                       width: AutoDimensions.calcW(150),
                     )
                   ],

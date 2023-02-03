@@ -1,17 +1,23 @@
 import 'dart:typed_data';
 import 'package:invoice_builder/models/invoice.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
 class PdfInvoiceGenApi {
   static Future<Uint8List> generate(Invoice invoice) async {
-    final headers = ['Item Description', 'Qty', 'Price', 'Total'];
+    final headers = [
+      AppStrings.headers[0],
+      AppStrings.headers[1],
+      AppStrings.headers[2],
+      AppStrings.headers[3]
+    ];
     final invoicesData = [...invoice.items.map((e) => e.toList()).toList()];
     final pdf = Document(pageMode: PdfPageMode.fullscreen);
     pdf.addPage(MultiPage(
         pageTheme: const PageTheme(margin: EdgeInsets.zero),
         //pageFormat: PdfPageFormat.a4,
-        maxPages: 2,
+        //maxPages: 2, // definissez le nombre de page des facture generer ici
         header: (context) =>
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
               Padding(

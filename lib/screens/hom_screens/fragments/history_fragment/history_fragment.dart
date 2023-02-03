@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoices_ctrl.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/history_fragment/widgets/history_invoice.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 
@@ -19,16 +20,16 @@ class HistoryFragment extends GetView<AllInvoiceController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               AppText(
-                text: 'No Invoice Build Yet',
+                text: AppStrings.nothinInvoiceBuildTitleHistoryFragment,
                 color: AppColors.cPrimary,
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                 child: AppText(
-                  text: 'However, all your created invoice history will be displayed this way.',
+                  text: AppStrings.nothinTempInvoiceBuildDescriptionHistoryFragment,
                   color: AppColors.cPrimary.withOpacity(.70),
                   maxline: 2,
-                  style: AppTextStyle.textStyle6(),
+                  style: AppTextStyle.textStyle5(),
                 ),
               )
             ],

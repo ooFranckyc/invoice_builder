@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
@@ -18,7 +19,8 @@ class SignatureScreen extends GetView<InvoiceController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.cWhite,
-      appBar: invoiceBuildAppBar(title: 'Sign your invoice', actions: [], showBackButton: true),
+      appBar: invoiceBuildAppBar(
+          title: AppStrings.textTitleSignatureComposite, actions: [], showBackButton: true),
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (scroll) {
@@ -55,7 +57,7 @@ class SignatureScreen extends GetView<InvoiceController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppBtn(
-                      label: 'Save',
+                      label: AppStrings.textSaveBtn,
                       action: () async {
                         ui.Image image = await _signaturePadKey.currentState!.toImage();
                         final pngBytes = await image.toByteData(format: ui.ImageByteFormat.png);
@@ -63,18 +65,18 @@ class SignatureScreen extends GetView<InvoiceController> {
                         Get.back();
                       },
                       color: AppColors.cPrimary,
-                      textColor: Colors.white,
+                      textColor: AppColors.cWhite,
                     ),
                     const SizedBox(
                       width: 20,
                     ),
                     AppBtn(
-                      label: 'Retry',
+                      label: AppStrings.textRetryBtn,
                       action: () async {
                         _signaturePadKey.currentState!.clear();
                       },
                       color: AppColors.cRed,
-                      textColor: Colors.white,
+                      textColor: AppColors.cWhite,
                     ),
                   ],
                 )
@@ -82,7 +84,6 @@ class SignatureScreen extends GetView<InvoiceController> {
             )
             // child: Column(
             //   children: [
-
             //     // (imgBytes != null)
             //     //     ? Image.memory(
             //     //         Uint8List.view(imgBytes!.buffer),

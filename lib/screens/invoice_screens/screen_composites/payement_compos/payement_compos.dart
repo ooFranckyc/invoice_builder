@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/snackbar.dart';
 import 'package:invoice_builder/shared/widgets/text_field.dart';
@@ -31,7 +32,7 @@ class PaymentInstructionsScreen extends GetView<InvoiceController> {
                   children: [
                     AppTextFormField(
                       controller: _paymentInstInputController,
-                      label: 'Write your instructions',
+                      label: AppStrings.textTitleDialogPaymentComposite,
                       height: AutoDimensions.calcH(100),
                       isRequired: true,
                     ),
@@ -39,12 +40,12 @@ class PaymentInstructionsScreen extends GetView<InvoiceController> {
                 ),
               ),
               AppBtn(
-                label: 'Save',
+                label: AppStrings.textSaveBtn,
                 action: () {
                   if (_paymentInstInputController.text.isEmpty ||
                       _paymentInstInputController.text.length < 5) {
                     messageWithSnackbar(
-                        context: context, message: "Please check your entries and try again!");
+                        context: context, message: AppStrings.paymentErrorScreenText);
                   } else {
                     controller.setPaymentInstructions(_paymentInstInputController.text);
                     Get.close(1);

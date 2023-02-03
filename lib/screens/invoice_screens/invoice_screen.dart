@@ -14,6 +14,7 @@ import 'package:invoice_builder/screens/invoice_screens/widgets/options_view.dar
 import 'package:invoice_builder/screens/preview_screens/pdf_gen_ai.dart';
 import 'package:invoice_builder/services/invoice_doc_handler.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
@@ -26,13 +27,13 @@ class InvoiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: invoiceBuildAppBar(
-          title: 'Create Invoice',
+          title: AppStrings.textTitleInvoiceScreen,
           actions: [
             Bounce(
               duration: const Duration(milliseconds: 180),
               onPressed: () {},
               child: Tooltip(
-                message: 'Read minimal instructions.',
+                message: AppStrings.tooltipReadBtnInvoiceScreen,
                 decoration: BoxDecoration(
                     color: AppColors.cPrimary.withOpacity(.80),
                     borderRadius: BorderRadius.circular(5)),
@@ -50,7 +51,7 @@ class InvoiceScreen extends StatelessWidget {
               duration: const Duration(milliseconds: 180),
               onPressed: () {},
               child: Tooltip(
-                message: 'Use template for cute result',
+                message: AppStrings.tooltipTemplateBtnInvoiceScreen,
                 decoration: BoxDecoration(
                     color: AppColors.cPrimary, borderRadius: BorderRadius.circular(5)),
                 showDuration: const Duration(seconds: 3),
@@ -88,8 +89,10 @@ class InvoiceScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                        child: SvgPicture.asset('assets/images/Invoice-rafiki.svg',
-                            width: 200, height: 200, semanticsLabel: 'Invoice Start Logo')),
+                        child: SvgPicture.asset(AppStrings.prepareBuildInvoiceLogo,
+                            width: 200,
+                            height: 200,
+                            semanticsLabel: AppStrings.prepareBuildInvoiceLogoSemantic)),
                     const SizedBox(height: 15.0),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -97,7 +100,7 @@ class InvoiceScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppText(
-                            text: 'Invoice# ${controller.id.substring(0, 5)}',
+                            text: '${AppStrings.textInvoice} ${controller.id.substring(0, 5)}',
                             style: AppTextStyle.textStyle2(color: AppColors.cPrimary),
                           ),
                           const SizedBox(
@@ -107,7 +110,7 @@ class InvoiceScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AppText(
-                                text: 'Invoice date',
+                                text: AppStrings.textInvoiceDate,
                                 style: AppTextStyle.textStyle3(color: AppColors.cPrimary),
                               ),
                               AppText(
@@ -122,20 +125,19 @@ class InvoiceScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 10.0),
                     OptionView(
-                        title: 'Add Customers',
-                        subTitle: 'add payer',
+                        title: AppStrings.textInvoiceCustomer,
                         onTap: () {
-                          Get.toNamed("/add_client");
+                          Get.toNamed(AppStrings.cutommerScreenTag);
                         },
                         isComplete: (controller.client != null) ? true : false,
                         showArrow: (controller.client != null) ? false : true),
                     OptionView(
-                      title: 'Manage Products',
-                      subTitle: (controller.itemsList.isEmpty)
-                          ? 'add items to your invoice'
-                          : "${controller.itemsList.length} have been added",
+                      title: AppStrings.textInvoiceManageProduct,
+                      // subTitle: (controller.itemsList.isEmpty)
+                      //     ? 'add items to your invoice'
+                      //     : "${controller.itemsList.length} have been added",
                       onTap: () {
-                        Get.toNamed("/add_items");
+                        Get.toNamed(AppStrings.itemScreenTag);
                       },
                       // isComplete:
                       //     (controller.itemsList.isNotEmpty) ? true : false,
@@ -143,20 +145,18 @@ class InvoiceScreen extends StatelessWidget {
                       //     (controller.itemsList.isEmpty) ? true : false
                     ),
                     OptionView(
-                        title: 'My Business',
-                        subTitle: 'add your business details',
+                        title: AppStrings.textInvoiceBusiness,
                         onTap: () {
-                          Get.toNamed("/add_business");
+                          Get.toNamed(AppStrings.businessScreenTag);
                         },
                         isComplete: (controller.business != null) ? true : false,
                         showArrow: (controller.business != null) ? false : true),
                     OptionView(
-                        title: 'Payment',
-                        subTitle: "add payment instructions",
+                        title: AppStrings.textInvoicePayment,
                         onTap: () {
                           if (controller.paymentInstructions == null) {
                             Get.defaultDialog(
-                              title: 'Payment Instructions',
+                              title: AppStrings.textInvoicePaymentInstruction,
                               content: PaymentInstructionsScreen(),
                             );
                           }
@@ -164,10 +164,9 @@ class InvoiceScreen extends StatelessWidget {
                         isComplete: (controller.paymentInstructions != null) ? true : false,
                         showArrow: (controller.paymentInstructions != null) ? false : true),
                     OptionView(
-                        title: 'Signature',
-                        subTitle: 'Sign your invoice',
+                        title: AppStrings.textInvoiceSignature,
                         onTap: () {
-                          Get.toNamed("/sign_invoice");
+                          Get.toNamed(AppStrings.textInvoiceSignature);
                         },
                         isComplete: (controller.signature != null) ? true : false,
                         showArrow: (controller.signature != null) ? false : true),
@@ -175,7 +174,7 @@ class InvoiceScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AppBtn(
-                          label: 'Preview',
+                          label: AppStrings.textInvoicePreview,
                           action: () async {
                             if (controller.business != null &&
                                 controller.client != null &&
@@ -183,12 +182,12 @@ class InvoiceScreen extends StatelessWidget {
                                 controller.paymentInstructions != null &&
                                 controller.itemsList.isNotEmpty) {
                               Invoice invoice = await controller.generatePreviewInvoice();
-                              Get.toNamed("/build_preview", arguments: {'invoice': invoice});
+                              Get.toNamed(AppStrings.previewScreenTag,
+                                  arguments: {'invoice': invoice});
                             } else {
                               messageWithSnackbar(
                                   context: context,
-                                  message:
-                                      'Error: You must fill in information that will constitute your invoice. Please fill them in! ');
+                                  message: AppStrings.invoicePreviewErrorScreenText);
                             }
                           },
                         ),
@@ -196,9 +195,9 @@ class InvoiceScreen extends StatelessWidget {
                           width: AutoDimensions.calcW(20),
                         ),
                         AppBtn(
-                          label: 'Create',
+                          label: AppStrings.textCreateBtn,
                           color: AppColors.cPrimary,
-                          textColor: Colors.white,
+                          textColor: AppColors.cWhite,
                           action: () async {
                             if (controller.business != null &&
                                 controller.client != null &&
@@ -209,14 +208,11 @@ class InvoiceScreen extends StatelessWidget {
                               InvoiceDocumentHandler.saveInvoice(
                                 name: "invoice-${invoice.id}.pdf",
                                 fileBytes: await PdfInvoiceGenApi.generate(invoice),
-                              );
-                              log('New Invoice Created');
+                              ); // Invoice Created and Saved to device.
                               Get.back();
                             } else {
                               messageWithSnackbar(
-                                  context: context,
-                                  message:
-                                      'Please you should filled all box for build with successfully your invoice');
+                                  context: context, message: AppStrings.invoiceSaveErrorScreenText);
                             }
                           },
                         ),

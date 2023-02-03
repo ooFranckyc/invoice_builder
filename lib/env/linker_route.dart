@@ -1,14 +1,16 @@
+import 'package:invoice_builder/shared/strings.dart';
+
 class AppLinks {
-  static const String splashScreen = "/";
-  static const String homeScreen = "/home_screen";
-  static const String loginScreen = "/login_screen";
-  static const String registerScreen = "/register_screen";
-  static const String newInvoiceScreen = "/new_invoice";
-  static const String newBuisinessScreen = "/add_business";
-  static const String newClientScreen = "/add_client";
-  static const String newItemScreen = "/add_items";
-  static const String signatureScreen = "/sign_invoice";
-  static const String previewScreen = "/build_preview";
-  static const String notificationScreen = "/notification_screen";
-  static const String onbordingScreen = "/onbording";
+  static String splashScreen = AppStrings.splashScreenTag;
+  static String homeScreen = AppStrings.homeScreenTag;
+  static String loginScreen = AppStrings.loginScreenTag;
+  static String registerScreen = AppStrings.registerScreenTag;
+  static String newInvoiceScreen = AppStrings.invoiceScreenTag;
+  static String newBuisinessScreen = AppStrings.businessScreenTag;
+  static String newCustomerScreen = AppStrings.cutommerScreenTag;
+  static String newItemScreen = AppStrings.invoiceScreenTag;
+  static String signatureScreen = AppStrings.signatureScreenTag;
+  static String previewScreen = AppStrings.previewScreenTag;
+  static String notificationScreen = AppStrings.notificationScreenSag;
+  static String onbordingScreen = AppStrings.onbordingScreenTag;
 }

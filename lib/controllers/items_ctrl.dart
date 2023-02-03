@@ -67,6 +67,30 @@ class ItemsController extends GetxController {
     calcTotal();
   }
 
+  void editItemName({required Item item, required String name}) {
+    String itemName = item.name = name;
+    String newName = itemName;
+    _itemsList.map((element) => Item(name: newName, qty: element.qty, price: element.price));
+    update();
+    calcTotal();
+  }
+
+  void editItemPrice({required Item item, required String price}) {
+    double itemPrice = item.price = double.parse(price);
+    double newPrice = itemPrice;
+    _itemsList.map((element) => Item(name: element.name, qty: element.qty, price: newPrice));
+    update();
+    calcTotal();
+  }
+
+  void editItemQuantity({required Item item, required String qty}) {
+    int itemQty = item.qty = int.parse(qty);
+    int newQty = itemQty;
+    _itemsList.map((element) => Item(name: element.name, qty: newQty, price: element.price));
+    update();
+    calcTotal();
+  }
+
   void clearItems() {
     _itemsList.clear();
     update();

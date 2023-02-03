@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:invoice_builder/controllers/client_ctrl.dart';
+import 'package:invoice_builder/controllers/customer_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/shared/colors.dart';
+import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
 import 'package:invoice_builder/shared/widgets/snackbar.dart';
 import 'package:invoice_builder/shared/widgets/text_field.dart';
 
-class ClientInformationScreen extends StatefulWidget {
-  const ClientInformationScreen({super.key});
+class CustomerInformationScreen extends StatefulWidget {
+  const CustomerInformationScreen({super.key});
 
   @override
-  State<ClientInformationScreen> createState() => _ClientInformationScreenState();
+  State<CustomerInformationScreen> createState() => _CustomerInformationScreenState();
 }
 
-class _ClientInformationScreenState extends State<ClientInformationScreen> {
+class _CustomerInformationScreenState extends State<CustomerInformationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: invoiceBuildAppBar(
-        title: 'Client(s)',
+        title: AppStrings.textTitleCustomerComposite,
         actions: [],
         showBackButton: true,
       ),
@@ -31,8 +32,8 @@ class _ClientInformationScreenState extends State<ClientInformationScreen> {
             return true;
           },
           child: SingleChildScrollView(
-            child: GetBuilder<ClientController>(
-              init: ClientController(),
+            child: GetBuilder<CustomerController>(
+              init: CustomerController(),
               builder: (controller) => Container(
                 margin: EdgeInsets.symmetric(
                   vertical: AutoDimensions.calcH(5),
@@ -47,28 +48,28 @@ class _ClientInformationScreenState extends State<ClientInformationScreen> {
                           children: [
                             AppTextFormField(
                               controller: controller.customerNameInputController,
-                              label: 'Full Name',
-                              hint: 'Add Client Fullname',
+                              label: AppStrings.textCustomerTitleNameComposite,
+                              hint: AppStrings.textCustomerTitleNameHintComposite,
                               isRequired: true,
                             ),
                             AppTextFormField(
                               controller: controller.customerEmailInputController,
-                              label: 'Email',
-                              hint: 'Add Client Email',
+                              label: AppStrings.textCustomerTitleEmailComposite,
+                              hint: AppStrings.textCustomerTitleEmailHintComposite,
                               isRequired: true,
                               type: TextInputType.emailAddress,
                             ),
                             AppTextFormField(
                               controller: controller.customerPhoneInputController,
-                              label: 'Phone',
-                              hint: 'Client Phone Number',
+                              label: AppStrings.textCustomerTitlePhoneNumberComposite,
+                              hint: AppStrings.textCustomerTitlePhoneNumberHintComposite,
                               isRequired: true,
                               type: TextInputType.phone,
                             ),
                             AppTextFormField(
                               controller: controller.customerAddressInputController,
-                              label: 'Address',
-                              hint: 'Client Location',
+                              label: AppStrings.textCustomerTitleAddressComposite,
+                              hint: AppStrings.textCustomerTitleAddressHintComposite,
                               height: AutoDimensions.calcH(100),
                               isRequired: true,
                             ),
@@ -79,16 +80,14 @@ class _ClientInformationScreenState extends State<ClientInformationScreen> {
                         height: AutoDimensions.calcH(50),
                       ),
                       AppBtn(
-                        label: 'Save',
+                        label: AppStrings.textSaveBtn,
                         action: () {
                           bool isValid = controller.validate();
                           if (isValid) {
                             Get.back();
                           } else {
                             messageWithSnackbar(
-                                context: context,
-                                message:
-                                    "Please Fill all the required fields for validate customers sections.");
+                                context: context, message: AppStrings.customerErrorScreenText);
                           }
                         },
                         color: AppColors.cPrimary,

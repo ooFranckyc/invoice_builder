@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
-import 'package:invoice_builder/models/client.dart';
+import 'package:invoice_builder/models/customer.dart';
 
-class ClientController extends GetxController {
-  Client? client;
+class CustomerController extends GetxController {
+  Customer? client;
   TextEditingController customerNameInputController = TextEditingController();
   TextEditingController customerEmailInputController = TextEditingController();
   TextEditingController customerPhoneInputController = TextEditingController();
@@ -18,7 +18,7 @@ class ClientController extends GetxController {
         customerAddressInputController.text.isEmpty) {
       return false;
     } else {
-      client = Client(
+      client = Customer(
           address: customerAddressInputController.text,
           email: customerEmailInputController.text,
           name: customerNameInputController.text,
