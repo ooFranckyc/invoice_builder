@@ -1,14 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bounce/flutter_bounce.dart';
-import 'package:get/get.dart';
-import 'package:invoice_builder/env/linker_route.dart';
-import 'package:invoice_builder/services/authentification.dart';
+import 'package:invoice_builder/screens/hom_screens/fragments/profile_fragment/widgets/setting_option.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/strings.dart';
-import 'package:invoice_builder/shared/widgets/snackbar.dart';
-import 'package:provider/provider.dart';
+import 'package:invoice_builder/shared/widgets/button.dart';
+import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileFragment extends StatefulWidget {
@@ -44,57 +42,115 @@ class _ProfileFragmentState extends State<ProfileFragment> {
 
   @override
   Widget build(BuildContext context) {
-    AuthentificationProvider authProvider = Provider.of<AuthentificationProvider>(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 18.0),
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: AppColors.cPrimary),
-                      shape: BoxShape.circle),
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: AppColors.cWhite),
-                        color: Colors.blue,
-                        image: DecorationImage(image: NetworkImage(profileImg), fit: BoxFit.cover),
-                        shape: BoxShape.circle),
-                  ),
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _profile(),
+            const SizedBox(height: 20.0),
+            _contentModel(title: 'Content', children: [
+              SettingOption(title: 'Favorites', leadingIcon: CupertinoIcons.heart, threaling: [
+                Icon(
+                  Icons.arrow_right_alt_sharp,
+                  size: 30,
+                  color: AppColors.cPrimary,
+                )
+              ]),
+              SettingOption(
+                  title: 'Downloads',
+                  leadingIcon: CupertinoIcons.cloud_download,
+                  threaling: [
+                    Icon(
+                      Icons.arrow_right_alt_sharp,
+                      size: 28,
+                      color: AppColors.cPrimary.withOpacity(.70),
+                    )
+                  ]),
+            ]),
+            _contentModel(title: 'Preferences', children: [
+              SettingOption(title: 'Languages', leadingIcon: Icons.language, threaling: [
+                AppText(
+                  text: 'English',
+                  style: AppTextStyle.textStyle6(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 5.0, bottom: 8),
-                  child: Image.asset(AppStrings.googleImage, width: 25, height: 25),
-                ),
-              ],
+                const SizedBox(width: 5),
+                Icon(
+                  Icons.arrow_right_alt_sharp,
+                  size: 28,
+                  color: AppColors.cPrimary.withOpacity(.70),
+                )
+              ]),
+              SettingOptionSwitch(
+                  title: 'Dark Mode', leadingIcon: CupertinoIcons.moon, value: false),
+              SettingOptionSwitch(
+                  title: 'Only Download via Wi-Fi', leadingIcon: CupertinoIcons.wifi, value: true),
+              SettingOptionSwitch(
+                  title: 'Auto Sync Cloud', leadingIcon: CupertinoIcons.arrow_up_doc, value: false),
+            ]),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _profile() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            decoration: BoxDecoration(
+                border: Border.all(width: 1, color: AppColors.cPrimary), shape: BoxShape.circle),
+            child: Container(
+              width: 110.0,
+              height: 110.0,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: AppColors.cWhite),
+                  shape: BoxShape.circle,
+                  color: Colors.grey.shade50),
             ),
           ),
-          const SizedBox(height: 15.0),
-          Text(
-            fullname,
-            style: AppTextStyle.textStyle1(),
-          ),
-          Text(
-            email,
-            style: AppTextStyle.textStyle3(weight: FontWeight.w500),
-          ),
-          const SizedBox(height: 40.0),
-          Bounce(
-              duration: const Duration(milliseconds: 180),
-              onPressed: () {
-                authProvider.handleSignOut();
-                Get.offAndToNamed(AppLinks.loginScreen);
-                messageWithSnackbar(context: context, message: 'Sign Out success !');
-              },
-              child: Text('Sign Out', style: AppTextStyle.textStyle3()))
-        ],
-      ),
+        ),
+        const SizedBox(height: 8.0),
+        AppText(
+          text: fullname,
+          style: AppTextStyle.textStyle2(),
+        ),
+        AppText(
+          text: email,
+          style: AppTextStyle.textStyle5(),
+        ),
+        const SizedBox(height: 12.0),
+        AppBtn(
+            label: 'Edit Profile',
+            action: () {},
+            color: AppColors.cPrimary,
+            textColor: AppColors.cWhite)
+      ],
+    );
+  }
+
+  Widget _contentModel({required String title, required List<Widget> children}) {
+    return Column(
+      children: [
+        Container(
+            width: double.infinity,
+            color: AppColors.cGreyLow,
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
+            alignment: Alignment.centerLeft,
+            child: AppText(
+              text: title.toUpperCase(),
+            )),
+        const SizedBox(height: 15.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: children),
+        ),
+      ],
     );
   }
 }

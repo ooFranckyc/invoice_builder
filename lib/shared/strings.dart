@@ -43,6 +43,8 @@ class AppStrings {
   static String textClosePreviewBtn = 'Close Preview';
   static String textWithGoogle = 'Continue with Google';
   static String textWithApple = 'Continue with Apple';
+  // Text Data Pdf Gen Ai Screen
+  static List<String> headers = ['Item Description', 'Qty', 'Price', 'Total'];
   // Text On Login Screen
   static String textTitleLoginScreen = 'Login Into Invoice Builder !';
   static String textSubtitleLoginScreen = 'Easy, Efficient and Productive.';
@@ -67,6 +69,7 @@ class AppStrings {
       'Build the fast invoice with more details and precision, with the desktop version.';
   // Text On Preview Invoice Screen
   static String textTitlePreviewInvoiceScreen = 'Invoice Preview';
+  static String textGenPreviewInvoiceScreen = 'Generate Preview, please wait';
   // Text On Invoice Screen
   static String textTitleInvoiceScreen = 'Create Invoice';
   static String textInvoice = 'Invoice#';

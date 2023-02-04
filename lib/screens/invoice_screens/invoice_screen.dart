@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -8,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:invoice_builder/controllers/invoice_ctrl.dart';
 import 'package:invoice_builder/controllers/invoices_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
+import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/models/invoice.dart';
 import 'package:invoice_builder/screens/invoice_screens/screen_composites/payement_compos/payement_compos.dart';
 import 'package:invoice_builder/screens/invoice_screens/widgets/options_view.dart';
@@ -127,7 +126,7 @@ class InvoiceScreen extends StatelessWidget {
                     OptionView(
                         title: AppStrings.textInvoiceCustomer,
                         onTap: () {
-                          Get.toNamed(AppStrings.cutommerScreenTag);
+                          Get.toNamed(AppLinks.newCustomerScreen);
                         },
                         isComplete: (controller.client != null) ? true : false,
                         showArrow: (controller.client != null) ? false : true),
@@ -137,7 +136,7 @@ class InvoiceScreen extends StatelessWidget {
                       //     ? 'add items to your invoice'
                       //     : "${controller.itemsList.length} have been added",
                       onTap: () {
-                        Get.toNamed(AppStrings.itemScreenTag);
+                        Get.toNamed(AppLinks.newItemScreen);
                       },
                       // isComplete:
                       //     (controller.itemsList.isNotEmpty) ? true : false,
@@ -147,7 +146,7 @@ class InvoiceScreen extends StatelessWidget {
                     OptionView(
                         title: AppStrings.textInvoiceBusiness,
                         onTap: () {
-                          Get.toNamed(AppStrings.businessScreenTag);
+                          Get.toNamed(AppLinks.newBuisinessScreen);
                         },
                         isComplete: (controller.business != null) ? true : false,
                         showArrow: (controller.business != null) ? false : true),
@@ -166,7 +165,7 @@ class InvoiceScreen extends StatelessWidget {
                     OptionView(
                         title: AppStrings.textInvoiceSignature,
                         onTap: () {
-                          Get.toNamed(AppStrings.textInvoiceSignature);
+                          Get.toNamed(AppLinks.signatureScreen);
                         },
                         isComplete: (controller.signature != null) ? true : false,
                         showArrow: (controller.signature != null) ? false : true),

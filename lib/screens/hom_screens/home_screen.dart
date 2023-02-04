@@ -1,20 +1,22 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/history_fragment/history_fragment.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/home_fragment.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/profile_fragment/profile_fragment.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/template_fragment/template_fragment.dart';
+import 'package:invoice_builder/services/authentification.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_appbar.dart';
+import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -30,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       menuScreen: const MenuScreen(),
       mainScreen: const MainScreen(),
       androidCloseOnBackTap: true,
+      disableDragGesture: true,
       angle: -1,
       slideWidth: MediaQuery.of(context).size.width * 0.65,
       borderRadius: 24.0,
@@ -57,7 +60,6 @@ class _MenuScreenState extends State<MenuScreen> {
     final SharedPreferences pref = await preferences;
     final sharedName = (pref.getString(FirestoreConstantsKey.nickname));
     final sharedProfile = (pref.getString(FirestoreConstantsKey.photoUrl));
-    log('Photo url is: $sharedProfile'); // just for debug
     setState(() {
       username = sharedName!;
       profile = sharedProfile!;
@@ -73,6 +75,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthentificationProvider authProvider = Provider.of<AuthentificationProvider>(context);
     return Scaffold(
       backgroundColor: AppColors.cPrimary,
       appBar: AppBar(
@@ -162,6 +165,25 @@ class _MenuScreenState extends State<MenuScreen> {
                       currentIndex = 5;
                     });
                     ZoomDrawer.of(context)!.toggle();
+                    Get.defaultDialog(
+                        title: 'Are sure?',
+                        titleStyle: AppTextStyle.textStyle4(),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                        content: AppText(
+                          text: 'Cofirm you sign out action',
+                          style: AppTextStyle.textStyle6(),
+                        ),
+                        actions: [
+                          GestureDetector(
+                            onTap: () async {
+                              await authProvider.handleSignOut();
+                            },
+                            child: AppText(
+                              text: 'Sign Out',
+                              style: AppTextStyle.textStyle5(weight: FontWeight.w700),
+                            ),
+                          )
+                        ]);
                   },
                   child: optionMenuTitle(
                       title: AppStrings.signOutHomePageOption,

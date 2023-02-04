@@ -98,7 +98,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                             EdgeInsets.symmetric(vertical: 8, horizontal: 15)),
                         splashFactory: NoSplash.splashFactory),
                     onPressed: () {
-                      Get.toNamed(AppLinks.registerScreen);
+                      Get.toNamed(AppLinks.newInvoiceScreen);
                     },
                     child: Text(
                       AppStrings.genInvoiceHomeFragment,

@@ -8,7 +8,7 @@ class AppLinks {
   static String newInvoiceScreen = AppStrings.invoiceScreenTag;
   static String newBuisinessScreen = AppStrings.businessScreenTag;
   static String newCustomerScreen = AppStrings.cutommerScreenTag;
-  static String newItemScreen = AppStrings.invoiceScreenTag;
+  static String newItemScreen = AppStrings.itemScreenTag;
   static String signatureScreen = AppStrings.signatureScreenTag;
   static String previewScreen = AppStrings.previewScreenTag;
   static String notificationScreen = AppStrings.notificationScreenSag;
