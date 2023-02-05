@@ -111,6 +111,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
               decoration: BoxDecoration(
                   border: Border.all(width: 1, color: AppColors.cWhite),
                   shape: BoxShape.circle,
+                  image: DecorationImage(image: NetworkImage(profileImg), fit: BoxFit.cover),
                   color: Colors.grey.shade50),
             ),
           ),

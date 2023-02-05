@@ -13,4 +13,6 @@ class AppLinks {
   static String previewScreen = AppStrings.previewScreenTag;
   static String notificationScreen = AppStrings.notificationScreenSag;
   static String onbordingScreen = AppStrings.onbordingScreenTag;
+  static String tempScreen = AppStrings.tempScreenTag;
+  static String lastTempScreen = AppStrings.lastTempScreenTag;
 }

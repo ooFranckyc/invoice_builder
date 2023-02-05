@@ -16,57 +16,57 @@ TableRow TableDataRepresentation({required Item? item, required BuildContext con
   ItemsController controller = Get.find();
   return TableRow(
     children: <Widget>[
-      GestureDetector(
-        onLongPress: () async {
-          await Get.defaultDialog(
-            radius: 8,
-            title: AppStrings.editName,
-            titleStyle: AppTextStyle.textStyle3(),
-            titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            contentPadding: EdgeInsets.zero,
-            content: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const Divider(),
-                    AppTextFormField(
-                      label: AppStrings.newName,
-                      controller: controller.itemNameInputController,
-                      isRequired: true,
-                      type: TextInputType.multiline,
-                      style: AppTextStyle.textStyle3(weight: FontWeight.w500),
-                    ),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
-                            padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                                EdgeInsets.symmetric(horizontal: 30))),
-                        onPressed: () {
-                          if (controller.itemNameInputController.text.isNotEmpty) {
-                            controller.editItemName(
-                                item: item!, name: controller.itemNameInputController.text);
-                            log(controller.itemNameInputController.text); // just for debug
-                            Get.close(1);
-                            controller.itemNameInputController.clear();
-                          } else {
-                            messageWithSnackbar(
-                                context: context,
-                                message: AppStrings.tabRepresentDataErrorScreenTextI);
-                          }
-                        },
-                        child: AppText(
-                          text: AppStrings.renameText,
-                          style: AppTextStyle.textStyle4(color: AppColors.cWhite),
-                        ))
-                  ],
+      TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: GestureDetector(
+          onLongPress: () async {
+            await Get.defaultDialog(
+              radius: 8,
+              title: AppStrings.editName,
+              titleStyle: AppTextStyle.textStyle3(),
+              titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              contentPadding: EdgeInsets.zero,
+              content: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const Divider(),
+                      AppTextFormField(
+                        label: AppStrings.newName,
+                        controller: controller.itemNameInputController,
+                        isRequired: true,
+                        type: TextInputType.multiline,
+                        style: AppTextStyle.textStyle3(weight: FontWeight.w500),
+                      ),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
+                              padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                                  EdgeInsets.symmetric(horizontal: 30))),
+                          onPressed: () {
+                            if (controller.itemNameInputController.text.isNotEmpty) {
+                              controller.editItemName(
+                                  item: item!, name: controller.itemNameInputController.text);
+                              log(controller.itemNameInputController.text); // just for debug
+                              Get.close(1);
+                              controller.itemNameInputController.clear();
+                            } else {
+                              messageWithSnackbar(
+                                  context: context,
+                                  message: AppStrings.tabRepresentDataErrorScreenTextI);
+                            }
+                          },
+                          child: AppText(
+                            text: AppStrings.renameText,
+                            style: AppTextStyle.textStyle4(color: AppColors.cWhite),
+                          ))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        child: TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+            );
+          },
           child: Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.all(8),
@@ -77,57 +77,57 @@ TableRow TableDataRepresentation({required Item? item, required BuildContext con
           ),
         ),
       ),
-      GestureDetector(
-        onLongPress: () async {
-          await Get.defaultDialog(
-            radius: 8,
-            title: AppStrings.editPrice,
-            titleStyle: AppTextStyle.textStyle3(),
-            titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            contentPadding: EdgeInsets.zero,
-            content: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const Divider(),
-                    AppTextFormField(
-                      label: AppStrings.newPrice,
-                      controller: controller.itemPriceInputController,
-                      isRequired: true,
-                      type: TextInputType.number,
-                      style: AppTextStyle.textStyle3(weight: FontWeight.w500),
-                    ),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
-                            padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                                EdgeInsets.symmetric(horizontal: 30))),
-                        onPressed: () {
-                          if (controller.itemPriceInputController.text.isNotEmpty) {
-                            controller.editItemPrice(
-                                item: item!, price: controller.itemPriceInputController.text);
-                            log(controller.itemPriceInputController.text); // just for debug
-                            Get.close(1);
-                            controller.itemPriceInputController.clear();
-                          } else {
-                            messageWithSnackbar(
-                                context: context,
-                                message: AppStrings.tabRepresentDataErrorScreenTextII);
-                          }
-                        },
-                        child: AppText(
-                          text: AppStrings.renameText,
-                          style: AppTextStyle.textStyle4(color: AppColors.cWhite),
-                        ))
-                  ],
+      TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: GestureDetector(
+          onLongPress: () async {
+            await Get.defaultDialog(
+              radius: 8,
+              title: AppStrings.editPrice,
+              titleStyle: AppTextStyle.textStyle3(),
+              titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              contentPadding: EdgeInsets.zero,
+              content: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const Divider(),
+                      AppTextFormField(
+                        label: AppStrings.newPrice,
+                        controller: controller.itemPriceInputController,
+                        isRequired: true,
+                        type: TextInputType.number,
+                        style: AppTextStyle.textStyle3(weight: FontWeight.w500),
+                      ),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
+                              padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                                  EdgeInsets.symmetric(horizontal: 30))),
+                          onPressed: () {
+                            if (controller.itemPriceInputController.text.isNotEmpty) {
+                              controller.editItemPrice(
+                                  item: item!, price: controller.itemPriceInputController.text);
+                              log(controller.itemPriceInputController.text); // just for debug
+                              Get.close(1);
+                              controller.itemPriceInputController.clear();
+                            } else {
+                              messageWithSnackbar(
+                                  context: context,
+                                  message: AppStrings.tabRepresentDataErrorScreenTextII);
+                            }
+                          },
+                          child: AppText(
+                            text: AppStrings.renameText,
+                            style: AppTextStyle.textStyle4(color: AppColors.cWhite),
+                          ))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        child: TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+            );
+          },
           child: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8),
@@ -138,57 +138,57 @@ TableRow TableDataRepresentation({required Item? item, required BuildContext con
           ),
         ),
       ),
-      GestureDetector(
-        onLongPress: () async {
-          await Get.defaultDialog(
-            radius: 8,
-            title: AppStrings.editQty,
-            titleStyle: AppTextStyle.textStyle3(),
-            titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            contentPadding: EdgeInsets.zero,
-            content: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const Divider(),
-                    AppTextFormField(
-                      label: AppStrings.newQty,
-                      controller: controller.itemQtyInputController,
-                      isRequired: true,
-                      type: TextInputType.number,
-                      style: AppTextStyle.textStyle3(weight: FontWeight.w500),
-                    ),
-                    ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
-                            padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                                EdgeInsets.symmetric(horizontal: 30))),
-                        onPressed: () {
-                          if (controller.itemQtyInputController.text.isNotEmpty) {
-                            controller.editItemQuantity(
-                                item: item!, qty: controller.itemQtyInputController.text);
-                            log(controller.itemQtyInputController.text);
-                            Get.close(1);
-                            controller.itemQtyInputController.clear();
-                          } else {
-                            messageWithSnackbar(
-                                context: context,
-                                message: AppStrings.tabRepresentDataErrorScreenTextIII);
-                          }
-                        },
-                        child: AppText(
-                          text: AppStrings.renameText,
-                          style: AppTextStyle.textStyle4(color: AppColors.cWhite),
-                        ))
-                  ],
+      TableCell(
+        verticalAlignment: TableCellVerticalAlignment.middle,
+        child: GestureDetector(
+          onLongPress: () async {
+            await Get.defaultDialog(
+              radius: 8,
+              title: AppStrings.editQty,
+              titleStyle: AppTextStyle.textStyle3(),
+              titlePadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              contentPadding: EdgeInsets.zero,
+              content: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const Divider(),
+                      AppTextFormField(
+                        label: AppStrings.newQty,
+                        controller: controller.itemQtyInputController,
+                        isRequired: true,
+                        type: TextInputType.number,
+                        style: AppTextStyle.textStyle3(weight: FontWeight.w500),
+                      ),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
+                              padding: const MaterialStatePropertyAll<EdgeInsetsGeometry>(
+                                  EdgeInsets.symmetric(horizontal: 30))),
+                          onPressed: () {
+                            if (controller.itemQtyInputController.text.isNotEmpty) {
+                              controller.editItemQuantity(
+                                  item: item!, qty: controller.itemQtyInputController.text);
+                              log(controller.itemQtyInputController.text);
+                              Get.close(1);
+                              controller.itemQtyInputController.clear();
+                            } else {
+                              messageWithSnackbar(
+                                  context: context,
+                                  message: AppStrings.tabRepresentDataErrorScreenTextIII);
+                            }
+                          },
+                          child: AppText(
+                            text: AppStrings.renameText,
+                            style: AppTextStyle.textStyle4(color: AppColors.cWhite),
+                          ))
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        child: TableCell(
-          verticalAlignment: TableCellVerticalAlignment.middle,
+            );
+          },
           child: Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(8),

@@ -13,8 +13,11 @@ class AppStrings {
   static String itemScreenTag = '/add_products';
   static String signatureScreenTag = '/sign_invoice';
   static String previewScreenTag = '/build_preview';
-  static String notificationScreenSag = '/notificationScreen';
+  static String notificationScreenSag = '/notification';
   static String onbordingScreenTag = '/onbording';
+  static String tempDetailScreenTag = '/tempDetail_screen_tag';
+  static String tempScreenTag = '/temp_screen_tag';
+  static String lastTempScreenTag = '/last_temp_screen_tag';
 
   static String defaultUsername = 'User';
   static String defaultNotifEmail = '@user';

@@ -1,9 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:invoice_builder/screens/hom_screens/fragments/history_fragment/history_fragment.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/home_fragment.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/profile_fragment/profile_fragment.dart';
@@ -13,11 +22,9 @@ import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
+import 'package:invoice_builder/shared/time.dart';
 import 'package:invoice_builder/shared/widgets/invoice_appbar.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,10 +33,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ConnectivityResult connectionStatus = ConnectivityResult.none;
+  final Connectivity connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> connectivitySubscription;
+
+  @override
+  void initState() {
+    initializeConntection();
+    connectivitySubscription = connectivity.onConnectivityChanged.listen(updateConnectionStatus);
+    super.initState();
+  }
+
+  Future<void> initializeConntection() async {
+    late ConnectivityResult result;
+    try {
+      result = await connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      log('Couldn\'t check connectivity status', error: e);
+      return;
+    }
+    if (!mounted) {
+      return Future.value(null);
+    }
+    return updateConnectionStatus(result);
+  }
+
+  Future<void> updateConnectionStatus(ConnectivityResult result) async {
+    setState(() {
+      connectionStatus = result;
+    });
+  }
+
+  @override
+  void dispose() {
+    connectivitySubscription.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ZoomDrawer(
-      menuScreen: const MenuScreen(),
+      menuScreen: MenuScreen(connectionStatus: connectionStatus),
       mainScreen: const MainScreen(),
       androidCloseOnBackTap: true,
       disableDragGesture: true,
@@ -44,14 +88,17 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class MenuScreen extends StatefulWidget {
-  const MenuScreen({super.key});
+  final ConnectivityResult connectionStatus;
+  const MenuScreen({
+    Key? key,
+    required this.connectionStatus,
+  }) : super(key: key);
 
   @override
   State<MenuScreen> createState() => _MenuScreenState();
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  final defaultDuration = const Duration(milliseconds: 180);
   int currentIndex = 0;
   final preferences = SharedPreferences.getInstance();
   String username = AppStrings.defaultUsername, profile = AppStrings.defaultProfileImage;
@@ -95,7 +142,7 @@ class _MenuScreenState extends State<MenuScreen> {
             child: Column(
               children: [
                 Bounce(
-                    duration: defaultDuration,
+                    duration: AppTimePlaner.defaultDuration,
                     onPressed: () {
                       setState(() {
                         currentIndex = 0;
@@ -107,7 +154,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         icon: CupertinoIcons.home,
                         isCurrent: currentIndex == 0 ? true : false)),
                 Bounce(
-                  duration: defaultDuration,
+                  duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
                       currentIndex = 1;
@@ -120,7 +167,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       isCurrent: currentIndex == 1 ? true : false),
                 ),
                 Bounce(
-                  duration: defaultDuration,
+                  duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
                       currentIndex = 2;
@@ -133,7 +180,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       isCurrent: currentIndex == 2 ? true : false),
                 ),
                 Bounce(
-                  duration: defaultDuration,
+                  duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
                       currentIndex = 3;
@@ -146,7 +193,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       isCurrent: currentIndex == 3 ? true : false),
                 ),
                 Bounce(
-                  duration: defaultDuration,
+                  duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
                       currentIndex = 4;
@@ -159,7 +206,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       isCurrent: currentIndex == 4 ? true : false),
                 ),
                 Bounce(
-                  duration: defaultDuration,
+                  duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
                       currentIndex = 5;
@@ -228,15 +275,16 @@ class _MenuScreenState extends State<MenuScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: 80.0,
-            height: 80.0,
-            decoration: BoxDecoration(
-                color: Colors.blue,
-                image: DecorationImage(image: NetworkImage(profile), fit: BoxFit.cover),
-                border: Border.all(width: 2, color: Colors.white),
-                shape: BoxShape.circle),
-          ),
+          if (widget.connectionStatus == ConnectionState.active)
+            Container(
+              width: 80.0,
+              height: 80.0,
+              decoration: BoxDecoration(
+                  color: Colors.blue,
+                  image: DecorationImage(image: NetworkImage(profile), fit: BoxFit.cover),
+                  border: Border.all(width: 2, color: Colors.white),
+                  shape: BoxShape.circle),
+            ),
           const SizedBox(width: 10.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

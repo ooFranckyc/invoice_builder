@@ -4,7 +4,7 @@ import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:get/get.dart';
 import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/screens/hom_screens/fragments/home_fragment/widgets/invoice_card.dart';
-import 'package:invoice_builder/screens/templates_screens/template_screen.dart';
+import 'package:invoice_builder/screens/templates_screens/template_details_screen.dart';
 import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/strings.dart';
@@ -186,7 +186,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         _templateUI(
             title: AppStrings.popularTempHomeFragment,
             action: AppStrings.viewAllHomeFragment,
-            onPress: () {}),
+            onPress: () => Get.toNamed(AppLinks.tempScreen)),
         const SizedBox(height: 10.0),
         /*
           A ce niveau, lorsque le service de reception & de modelisation de facture venant 
@@ -196,27 +196,8 @@ class _HomeFragmentState extends State<HomeFragment> {
           Le widget recommande est FutureBuilder(args) -> a venir 
         */
         SizedBox(
-            height: 230,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                itemCount: listAvaiblesLocalInvoices.length,
-                itemBuilder: (context, index) => OpenContainer(
-                      closedBuilder: (BuildContext context, void Function() action) {
-                        return InvoiceCard(
-                            title: listAvaiblesLocalInvoices[index][0],
-                            heroPreview: listAvaiblesLocalInvoices[index][1]);
-                      },
-                      openBuilder:
-                          (BuildContext context, void Function({Object? returnValue}) action) {
-                        return TemplateScreenDetails(
-                            templateName: listAvaiblesLocalInvoices[index][0],
-                            templateImage: listAvaiblesLocalInvoices[index][1],
-                            templateDesc: listAvaiblesLocalInvoices[index][2],
-                            isFavorite: listAvaiblesLocalInvoices[index][3]);
-                      },
-                    )))
+          height: 230,
+        )
       ],
     );
   }
@@ -227,7 +208,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         _templateUI(
             title: AppStrings.lastTempUsedHomeFragment,
             action: AppStrings.viewAllHomeFragment,
-            onPress: () {}),
+            onPress: () => Get.toNamed(AppLinks.lastTempScreen)),
         const SizedBox(
           height: 30.0,
         ),

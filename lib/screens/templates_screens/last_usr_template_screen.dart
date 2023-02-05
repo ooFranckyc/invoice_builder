@@ -4,14 +4,14 @@ import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 
-class TemplateScreen extends StatefulWidget {
-  const TemplateScreen({super.key});
+class LastTemplateUsedScreen extends StatefulWidget {
+  const LastTemplateUsedScreen({super.key});
 
   @override
-  State<TemplateScreen> createState() => _TemplateScreenState();
+  State<LastTemplateUsedScreen> createState() => _LastTemplateUsedScreenState();
 }
 
-class _TemplateScreenState extends State<TemplateScreen> {
+class _LastTemplateUsedScreenState extends State<LastTemplateUsedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
         automaticallyImplyLeading: true,
         iconTheme: IconThemeData(color: AppColors.cPrimary),
         title: AppText(
-          text: 'Find template',
+          text: 'You Templates',
           style: AppTextStyle.textStyle3(color: AppColors.cPrimary),
         ),
       ),

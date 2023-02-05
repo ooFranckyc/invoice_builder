@@ -15,6 +15,8 @@ import 'package:invoice_builder/screens/onbording_screens/onbording_screen.dart'
 import 'package:invoice_builder/screens/preview_screens/preview_screen.dart';
 import 'package:invoice_builder/screens/register_screen/register_screen.dart';
 import 'package:invoice_builder/screens/splash_screens/splash_screen.dart';
+import 'package:invoice_builder/screens/templates_screens/last_usr_template_screen.dart';
+import 'package:invoice_builder/screens/templates_screens/template_screen.dart';
 
 class AppRouting {
   static final routing = [
@@ -77,12 +79,15 @@ class AppRouting {
       page: () => const OnBordingScreen(),
       transition: Transition.rightToLeft,
     ),
+    GetPage(
+      name: AppLinks.tempScreen,
+      page: () => const TemplateScreen(),
+      transition: Transition.rightToLeftWithFade,
+    ),
+    GetPage(
+      name: AppLinks.lastTempScreen,
+      page: () => const LastTemplateUsedScreen(),
+      transition: Transition.rightToLeftWithFade,
+    ),
   ];
 }
-
-// class HomeBinding extends Bindings {
-//   @override
-//   void dependencies() {
-//     Get.put(AllInvoiceController(), permanent: true);
-//   }
-// }
