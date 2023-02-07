@@ -32,7 +32,12 @@ AppBar invoiceBuildAppBar(
         : null,
     centerTitle: true,
     title: Text(title, style: AppTextStyle.textStyle3()),
-    systemOverlayStyle: sysUiBar,
+    systemOverlayStyle: sysUiBar ??
+        SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarColor: AppColors.cWhite,
+        ),
     actions: [
       Padding(
         padding: const EdgeInsets.only(right: 10),

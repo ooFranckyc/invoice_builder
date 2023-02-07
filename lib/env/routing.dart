@@ -30,13 +30,11 @@ class AppRouting {
         binding: HomeBinding(),
         transition: Transition.circularReveal),
     GetPage(
-        name: AppLinks.loginScreen,
-        page: () => const LoginScreen(),
-        transition: Transition.rightToLeft),
+        name: AppLinks.loginScreen, page: () => const LoginScreen(), transition: Transition.native),
     GetPage(
         name: AppLinks.registerScreen,
         page: () => const RegisterScreen(),
-        transition: Transition.rightToLeft),
+        transition: Transition.native),
     GetPage(
       name: AppLinks.newInvoiceScreen,
       page: () => const InvoiceScreen(),
@@ -82,12 +80,12 @@ class AppRouting {
     GetPage(
       name: AppLinks.tempScreen,
       page: () => const TemplateScreen(),
-      transition: Transition.rightToLeftWithFade,
+      transition: Transition.native,
     ),
     GetPage(
       name: AppLinks.lastTempScreen,
       page: () => const LastTemplateUsedScreen(),
-      transition: Transition.rightToLeftWithFade,
+      transition: Transition.native,
     ),
   ];
 }

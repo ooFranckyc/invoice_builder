@@ -10,7 +10,9 @@ import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/searchbar.dart';
+import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeFragment extends StatefulWidget {
   const HomeFragment({super.key});
@@ -23,6 +25,8 @@ class _HomeFragmentState extends State<HomeFragment> {
   final defaultDuration = const Duration(milliseconds: 180);
   final preferences = SharedPreferences.getInstance();
   String username = AppStrings.defaultUsername, profile = AppStrings.defaultProfileImage;
+  final Stream<QuerySnapshot> popularInvoiceStream =
+      FirebaseFirestore.instance.collection('Populars').snapshots();
 
   getInfo() async {
     final SharedPreferences pref = await preferences;
@@ -125,61 +129,6 @@ class _HomeFragmentState extends State<HomeFragment> {
     );
   }
 
-  // Facture local de conception, s'il vous plait, si, a ce moment de developpement
-  // De l'application, le service de reception de facture modeliser depuis firebase n'est pas encore
-  // Operationel, veuillez si vous en etes capable vous en occuper !
-  // ? contact: ed.franckmekoulou@outlook.com
-  final listAvaiblesLocalInvoices = [
-    [
-      'Abstract Black',
-      'assets/invoices-local-preview/abstract-black.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-    [
-      'Geometric Business',
-      'assets/invoices-local-preview/abstract-geometric-business.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-    [
-      'Corporative Business',
-      'assets/invoices-local-preview/corporative-business.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-    [
-      'Elegant Blue',
-      'assets/invoices-local-preview/elegant-blue-gray.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-    [
-      'Driving School',
-      'assets/invoices-local-preview/flat-design-driving-school.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-    [
-      'Geometric Architecure',
-      'assets/invoices-local-preview/geometric-architecture.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-    [
-      'Indoo Potted Plants',
-      'assets/invoices-local-preview/indoor-potted-plants.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-    [
-      'Minimal Yellow',
-      'assets/invoices-local-preview/minimal-yellow.jpg',
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim illum esse voluptatum, ad perspiciatis placeat totam nesciunt iusto cum! Quia neque dolor commodi molestiae eius ipsam dicta id cupiditate?',
-      'false'
-    ],
-  ];
-
   Widget _usingPopularInvoice() {
     return Column(
       children: [
@@ -196,7 +145,67 @@ class _HomeFragmentState extends State<HomeFragment> {
           Le widget recommande est FutureBuilder(args) -> a venir 
         */
         SizedBox(
-          height: 230,
+          height: 235,
+          child: StreamBuilder<QuerySnapshot>(
+              stream: popularInvoiceStream,
+              builder: (cuildContext, snapshot) {
+                if (snapshot.hasError) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.sentiment_dissatisfied,
+                        color: AppColors.cPrimary,
+                        size: 25,
+                      ),
+                      AppText(
+                        text: 'Something went wrong',
+                        style: AppTextStyle.textStyle5(),
+                      ),
+                    ],
+                  );
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        color: AppColors.cPrimary,
+                      ),
+                      AppText(
+                        text: 'Loading...',
+                        style: AppTextStyle.textStyle5(),
+                      ),
+                    ],
+                  );
+                }
+                return ListView(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  children: snapshot.data!.docs
+                      .map((DocumentSnapshot document) {
+                        Map<String, dynamic> invoice = document.data()! as Map<String, dynamic>;
+                        return OpenContainer(
+                          closedBuilder: (BuildContext context, void Function() action) {
+                            return InvoiceCard(
+                                title: invoice['name'], heroPreview: invoice['image']);
+                          },
+                          openBuilder:
+                              (BuildContext context, void Function({Object? returnValue}) action) {
+                            return TemplateScreenDetails(
+                              templateName: invoice['name'],
+                              templateImage: invoice['image'],
+                              templateDomain: invoice['domain'],
+                              templateDesc: invoice['desc'],
+                              templateLike: int.parse(invoice['like']),
+                            );
+                          },
+                        );
+                      })
+                      .toList()
+                      .cast(),
+                );
+              }),
         )
       ],
     );

@@ -16,7 +16,7 @@ class NotificationScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(CupertinoIcons.bell_fill, size: 40, color: AppColors.cPrimary.withOpacity(.90)),
+            Icon(CupertinoIcons.bell_fill, size: 30, color: AppColors.cPrimary.withOpacity(.80)),
             const SizedBox(height: 10),
             Text('No Notification', style: AppTextStyle.textStyle2())
           ],

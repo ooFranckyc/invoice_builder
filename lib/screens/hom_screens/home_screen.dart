@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
+import 'package:invoice_builder/env/linker_route.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -157,9 +158,10 @@ class _MenuScreenState extends State<MenuScreen> {
                   duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
-                      currentIndex = 1;
+                      currentIndex = 0; // A 0 parce que l'on revient toujours en page principal
                     });
                     ZoomDrawer.of(context)!.toggle();
+                    Get.toNamed(AppLinks.tempScreen);
                   },
                   child: optionMenuTitle(
                       title: AppStrings.templateHomePageOption,
@@ -170,9 +172,10 @@ class _MenuScreenState extends State<MenuScreen> {
                   duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
-                      currentIndex = 2;
+                      currentIndex = 0; // A 0 parce que l'on revient toujours en page principal
                     });
                     ZoomDrawer.of(context)!.toggle();
+                    Get.toNamed(AppLinks.notificationScreen);
                   },
                   child: optionMenuTitle(
                       title: AppStrings.notificationHomePageOption,
@@ -183,7 +186,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
-                      currentIndex = 3;
+                      currentIndex = 0; // A 0 parce que l'on revient toujours en page principal
                     });
                     ZoomDrawer.of(context)!.toggle();
                   },
@@ -196,7 +199,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   duration: AppTimePlaner.defaultDuration,
                   onPressed: () {
                     setState(() {
-                      currentIndex = 4;
+                      currentIndex = 0; // A 0 parce que l'on revient toujours en page principal
                     });
                     ZoomDrawer.of(context)!.toggle();
                   },

@@ -62,6 +62,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   flutter_onboarding_slider: ^1.0.8
   connectivity_plus: ^3.0.2
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

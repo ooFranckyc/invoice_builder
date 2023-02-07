@@ -34,7 +34,7 @@ class _SettingOptionState extends State<SettingOption> {
               const SizedBox(width: 8.0),
               AppText(
                 text: widget.title,
-                style: AppTextStyle.textStyle3(
+                style: AppTextStyle.textStyle4(
                   color: AppColors.cPrimary.withOpacity(.70),
                 ),
               )
@@ -82,7 +82,7 @@ class _SettingOptionSwitchState extends State<SettingOptionSwitch> {
               const SizedBox(width: 8.0),
               AppText(
                 text: widget.title,
-                style: AppTextStyle.textStyle3(
+                style: AppTextStyle.textStyle4(
                   color: AppColors.cPrimary.withOpacity(.80),
                 ),
               )

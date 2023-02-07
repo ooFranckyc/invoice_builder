@@ -8,6 +8,7 @@ import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/widgets/button.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProfileFragment extends StatefulWidget {
   const ProfileFragment({super.key});
@@ -18,9 +19,15 @@ class ProfileFragment extends StatefulWidget {
 
 class _ProfileFragmentState extends State<ProfileFragment> {
   final preferences = SharedPreferences.getInstance();
-  String fullname = AppStrings.defaultUsername,
-      profileImg = AppStrings.defaultProfileImage,
-      email = AppStrings.defaultNotifEmail;
+  String fullname = AppStrings.defaultUsername;
+  String email = AppStrings.defaultNotifEmail;
+  String profileImg = AppStrings.defaultProfileImage;
+
+  @override
+  void initState() {
+    getInfo();
+    super.initState();
+  }
 
   getInfo() async {
     final SharedPreferences pref = await preferences;
@@ -32,12 +39,6 @@ class _ProfileFragmentState extends State<ProfileFragment> {
       email = sharedEmail!;
       profileImg = sharedPhotoUrl!;
     });
-  }
-
-  @override
-  void initState() {
-    getInfo();
-    super.initState();
   }
 
   @override
@@ -102,17 +103,13 @@ class _ProfileFragmentState extends State<ProfileFragment> {
       children: [
         Align(
           alignment: Alignment.topCenter,
-          child: Container(
-            decoration: BoxDecoration(
-                border: Border.all(width: 1, color: AppColors.cPrimary), shape: BoxShape.circle),
-            child: Container(
-              width: 110.0,
-              height: 110.0,
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: AppColors.cWhite),
-                  shape: BoxShape.circle,
-                  image: DecorationImage(image: NetworkImage(profileImg), fit: BoxFit.cover),
-                  color: Colors.grey.shade50),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(100),
+            child: CachedNetworkImage(
+              imageUrl: profileImg,
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),
@@ -145,6 +142,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
             alignment: Alignment.centerLeft,
             child: AppText(
               text: title.toUpperCase(),
+              style: AppTextStyle.textStyle4(weight: FontWeight.w600),
             )),
         const SizedBox(height: 15.0),
         Padding(

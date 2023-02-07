@@ -164,7 +164,8 @@ class AppStrings {
   // Assets Image
   static String googleImage = 'assets/google.png';
   static String appleImage = 'assets/apple.png';
-  static String defaultProfileImage = 'assets/invoice.png';
+  static String defaultProfileImage =
+      'https://cdn-icons-png.flaticon.com/512/4228/4228707.png'; // depuis flaticon, une image par defaut au profile invoice builder
   static String doneArgumentIcons = 'assets/icons/success_circle.svg';
   static String prepareBuildInvoiceLogo = 'assets/images/Invoice-rafiki.svg';
   static String onBordingInvoiceI = 'assets/images/Invoice-pana.svg';
