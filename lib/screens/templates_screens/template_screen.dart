@@ -177,7 +177,7 @@ class _TemplateScreenState extends State<TemplateScreen> {
                                               templateDesc: invoice['desc'],
                                               templateDomain: invoice['domain'],
                                               templateImage: invoice['image'],
-                                              templateLike: int.parse(invoice['like']),
+                                              templateLike: invoice['like'],
                                             )));
                                   },
                                   child: Container(

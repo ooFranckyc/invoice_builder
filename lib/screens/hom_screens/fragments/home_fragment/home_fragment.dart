@@ -206,7 +206,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                                 templateImage: invoice['image'],
                                 templateDomain: invoice['domain'],
                                 templateDesc: invoice['desc'],
-                                templateLike: int.parse(invoice['like']),
+                                templateLike: invoice['like'],
                               );
                             },
                           );
