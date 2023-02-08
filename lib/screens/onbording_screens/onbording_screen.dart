@@ -25,12 +25,13 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
             statusBarBrightness: Brightness.dark,
             statusBarIconBrightness: Brightness.dark,
             statusBarColor: AppColors.cWhite,
-            systemNavigationBarColor: AppColors.cWhite),
+            systemNavigationBarColor: AppColors.dColor),
         backgroundColor: AppColors.cWhite,
         elevation: 0.0,
       ),
+      backgroundColor: AppColors.cWhite,
       body: OnBoardingSlider(
-        headerBackgroundColor: AppColors.cWhite,
+        headerBackgroundColor: AppColors.dColor,
         finishButtonText: AppStrings.textRegisterOnbordingScreen,
         onFinish: () {
           Get.offAllNamed(AppLinks.registerScreen);
@@ -46,12 +47,17 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
         imageVerticalOffset: MediaQuery.of(context).size.width / 6,
         finishButtonColor: AppColors.cPrimary,
         background: [
-          SvgPicture.asset(AppStrings.onBordingInvoiceI, width: 270, height: 270),
+          SvgPicture.asset(
+            AppStrings.onBordingInvoiceI,
+            width: 270,
+            height: 270,
+          ),
           SvgPicture.asset(AppStrings.onBordingInvoiceII, width: 270, height: 270),
           SvgPicture.asset(AppStrings.onBordingInvoiceIII, width: 270, height: 270),
         ],
         totalPage: 3,
         speed: 1.8,
+        controllerColor: AppColors.cPrimary,
         pageBodies: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),

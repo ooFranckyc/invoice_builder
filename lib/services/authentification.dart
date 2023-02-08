@@ -61,7 +61,7 @@ class AuthentificationProvider extends ChangeNotifier {
             FirestoreConstantsKey.nickname: firebaseUser.displayName,
             FirestoreConstantsKey.photoUrl: firebaseUser.photoURL,
             FirestoreConstantsKey.id: firebaseUser.uid,
-            'Account Create At': DateTime.now().millisecondsSinceEpoch.toString()
+            'Account Create At': DateTime.now().day.toString()
           });
           User? currentUser = firebaseUser;
           await preferences.setString(FirestoreConstantsKey.id, currentUser.uid);

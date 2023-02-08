@@ -27,6 +27,7 @@ class BusinessComposScreen extends StatelessWidget {
         actions: [],
         showBackButton: true,
       ),
+      backgroundColor: AppColors.cWhite,
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (scroll) {

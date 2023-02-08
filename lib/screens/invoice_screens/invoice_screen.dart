@@ -8,7 +8,6 @@ import 'package:invoice_builder/controllers/invoices_ctrl.dart';
 import 'package:invoice_builder/env/auto_dimens.dart';
 import 'package:invoice_builder/env/linker_route.dart';
 import 'package:invoice_builder/models/invoice.dart';
-import 'package:invoice_builder/screens/invoice_screens/screen_composites/payement_compos/payement_compos.dart';
 import 'package:invoice_builder/screens/invoice_screens/widgets/options_view.dart';
 import 'package:invoice_builder/screens/preview_screens/pdf_gen_ai.dart';
 import 'package:invoice_builder/services/invoice_doc_handler.dart';
@@ -34,21 +33,23 @@ class InvoiceScreen extends StatelessWidget {
               child: Tooltip(
                 message: AppStrings.tooltipReadBtnInvoiceScreen,
                 decoration: BoxDecoration(
-                    color: AppColors.cPrimary.withOpacity(.80),
-                    borderRadius: BorderRadius.circular(5)),
+                    color: AppColors.cPrimary, borderRadius: BorderRadius.circular(5)),
                 showDuration: const Duration(seconds: 3),
                 child: Container(
                   width: 50,
                   height: 50,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+                  // decoration: BoxDecoration(
+                  //     color: AppColors.cPrimary.withOpacity(.10), shape: BoxShape.circle),
                   child: Icon(Icons.info_outline, color: AppColors.cPrimary),
                 ),
               ),
             ),
             Bounce(
               duration: const Duration(milliseconds: 180),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AppLinks.tempScreen);
+              },
               child: Tooltip(
                 message: AppStrings.tooltipTemplateBtnInvoiceScreen,
                 decoration: BoxDecoration(
@@ -58,7 +59,8 @@ class InvoiceScreen extends StatelessWidget {
                   width: 50,
                   height: 50,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+                  // decoration: BoxDecoration(
+                  //     color: AppColors.cPrimary.withOpacity(.10), shape: BoxShape.circle),
                   child: Icon(CupertinoIcons.doc_text_search, color: AppColors.cPrimary),
                 ),
               ),
@@ -153,12 +155,13 @@ class InvoiceScreen extends StatelessWidget {
                     OptionView(
                         title: AppStrings.textInvoicePayment,
                         onTap: () {
-                          if (controller.paymentInstructions == null) {
-                            Get.defaultDialog(
-                              title: AppStrings.textInvoicePaymentInstruction,
-                              content: PaymentInstructionsScreen(),
-                            );
-                          }
+                          Get.toNamed(AppLinks.newPaymentScreen);
+                          // if (controller.paymentInstructions == null) {
+                          //   Get.defaultDialog(
+                          //     title: AppStrings.textInvoicePaymentInstruction,
+                          //     content: PaymentInstructionsScreen(),
+                          //   );
+                          // }
                         },
                         isComplete: (controller.paymentInstructions != null) ? true : false,
                         showArrow: (controller.paymentInstructions != null) ? false : true),

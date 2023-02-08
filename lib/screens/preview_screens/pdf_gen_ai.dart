@@ -57,7 +57,7 @@ class PdfInvoiceGenApi {
             ]),
         build: (context) => [
               pw.Padding(
-                padding: const pw.EdgeInsets.symmetric(horizontal: 50),
+                padding: const pw.EdgeInsets.symmetric(horizontal: 45),
                 child: pw.Column(
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [

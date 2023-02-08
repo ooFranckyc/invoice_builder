@@ -33,7 +33,7 @@ AppBar mainAppBar({required BuildContext context, required int index}) {
       onPressed: () => ZoomDrawer.of(context)!.toggle(),
       child: Container(
           alignment: Alignment.center,
-          decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+          decoration: BoxDecoration(color: AppColors.cTransparent, shape: BoxShape.circle),
           margin: const EdgeInsets.symmetric(horizontal: 10.0),
           padding: const EdgeInsets.all(5.0),
           child: const Icon(Icons.menu)),

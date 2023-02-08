@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
@@ -35,6 +36,20 @@ class _TemplateScreenState extends State<TemplateScreen> {
         centerTitle: true,
         automaticallyImplyLeading: true,
         iconTheme: IconThemeData(color: AppColors.cPrimary),
+        actions: [
+          Bounce(
+            duration: const Duration(milliseconds: 180),
+            onPressed: () {},
+            child: Container(
+              width: 50,
+              height: 50,
+              margin: const EdgeInsets.only(right: 10),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+              child: Icon(CupertinoIcons.search, color: AppColors.cPrimary),
+            ),
+          )
+        ],
         title: AppText(
           text: 'Find template',
           style: AppTextStyle.textStyle3(color: AppColors.cPrimary),

@@ -18,9 +18,9 @@ class SignatureScreen extends GetView<InvoiceController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cWhite,
       appBar: invoiceBuildAppBar(
           title: AppStrings.textTitleSignatureComposite, actions: [], showBackButton: true),
+      backgroundColor: AppColors.cWhite,
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (scroll) {
@@ -30,23 +30,19 @@ class SignatureScreen extends GetView<InvoiceController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                DottedBorder(
-                  color: AppColors.cPrimary,
-                  strokeWidth: .5,
-                  child: Container(
-                    height: Get.size.height * 0.45,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: DottedBorder(
-                      color: AppColors.cPrimary.withOpacity(.50),
-                      radius: const Radius.circular(12),
-                      strokeWidth: 2,
-                      child: SfSignaturePad(
-                        key: _signaturePadKey,
-                        minimumStrokeWidth: 2,
-                        maximumStrokeWidth: 4,
-                        strokeColor: AppColors.cPrimary,
-                        backgroundColor: AppColors.cGreyLow,
-                      ),
+                Container(
+                  height: Get.size.height * 0.45,
+                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: DottedBorder(
+                    color: AppColors.cPrimary.withOpacity(.10),
+                    radius: const Radius.circular(12),
+                    strokeWidth: 2,
+                    child: SfSignaturePad(
+                      key: _signaturePadKey,
+                      minimumStrokeWidth: 2,
+                      maximumStrokeWidth: 4,
+                      strokeColor: AppColors.cPrimary,
+                      backgroundColor: AppColors.cGreyLow,
                     ),
                   ),
                 ),

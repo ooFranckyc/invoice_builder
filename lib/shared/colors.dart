@@ -7,4 +7,7 @@ class AppColors {
   static Color cGreyLow = const Color(0xffF7F7F7);
   static Color cTransparent = Colors.transparent;
   static Color cRed = Colors.red.shade400;
+  //static Color dColor = Colors.white;
+  static Color dColor = const Color.fromARGB(255, 245, 244, 241);
+  static Color menuBgColor = const Color(0xff70A489);
 }

@@ -25,6 +25,7 @@ class _CustomerInformationScreenState extends State<CustomerInformationScreen> {
         actions: [],
         showBackButton: true,
       ),
+      backgroundColor: AppColors.cWhite,
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (scroll) {

@@ -35,8 +35,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         messageWithSnackbar(context: context, message: 'Autentification has canceled');
         break;
       case AuthentificationStatus.authentificated:
-        messageWithSnackbar(
-            context: context, message: 'Autentification has canceled', color: Colors.blue.shade600);
         break;
       default:
     }
@@ -45,12 +43,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           elevation: 0.0,
           title: "",
           actions: [],
+          backgroundColor: AppColors.dColor,
           showBackButton: false,
           sysUiBar: SystemUiOverlayStyle(
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark,
-              statusBarColor: AppColors.cWhite,
-              systemNavigationBarColor: AppColors.cWhite)),
+              statusBarColor: AppColors.dColor,
+              systemNavigationBarColor: AppColors.dColor)),
+      backgroundColor: AppColors.dColor,
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -80,10 +80,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Get.offAndToNamed(AppLinks.homeScreen);
                     }
                   },
-                  child: const AuthButton(
+                  child: AuthButton(
                     title: 'Continue with Google',
                     iconAsImage: 'assets/google.png',
-                    isFilled: false,
+                    isFilled: true,
+                    color: AppColors.cPrimary.withOpacity(.40),
                   )),
               const SizedBox(height: 10),
               Bounce(
@@ -91,10 +92,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () async {
                     //Apple Sign In code
                   },
-                  child: const AuthButton(
+                  child: AuthButton(
                     title: 'Continue with Apple',
                     iconAsImage: 'assets/apple.png',
-                    isFilled: false,
+                    isFilled: true,
+                    color: AppColors.cPrimary.withOpacity(.40),
                   )),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         const SizedBox(height: 15),
                         GestureDetector(
                           onTap: () {
-                            Get.back();
+                            Get.toNamed(AppLinks.loginScreen);
                           },
                           child: AppText(
                             text: 'Already account?',

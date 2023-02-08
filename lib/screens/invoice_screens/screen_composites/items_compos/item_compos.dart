@@ -33,6 +33,7 @@ class ItemCompoScreen extends GetView<ItemsController> {
     return Scaffold(
       appBar: invoiceBuildAppBar(
           title: AppStrings.textTitleItemsComposite, actions: [], showBackButton: true),
+      backgroundColor: AppColors.cWhite,
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (scroll) {

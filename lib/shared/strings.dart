@@ -10,10 +10,12 @@ class AppStrings {
   static String invoiceScreenTag = '/new_invoice';
   static String businessScreenTag = '/add_business';
   static String cutommerScreenTag = '/add_customer';
+  static String paymentScreenTag = '/add_payment';
   static String itemScreenTag = '/add_products';
   static String signatureScreenTag = '/sign_invoice';
   static String previewScreenTag = '/build_preview';
   static String notificationScreenSag = '/notification';
+  static String contactScreenSag = '/contact_screen_tag';
   static String onbordingScreenTag = '/onbording';
   static String tempDetailScreenTag = '/tempDetail_screen_tag';
   static String tempScreenTag = '/temp_screen_tag';
@@ -49,7 +51,7 @@ class AppStrings {
   // Text Data Pdf Gen Ai Screen
   static List<String> headers = ['Item Description', 'Qty', 'Price', 'Total'];
   // Text On Login Screen
-  static String textTitleLoginScreen = 'Login Into Invoice Builder !';
+  static String textTitleLoginScreen = 'Login';
   static String textSubtitleLoginScreen = 'Easy, Efficient and Productive.';
   static String textDescLoginScreen =
       'Invoice creator allows you to build different invoices in a professional way with thousands of free templates. Log in and build invoices for your customers.';

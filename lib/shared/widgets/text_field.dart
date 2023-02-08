@@ -13,6 +13,7 @@ class AppTextFormField extends StatelessWidget {
   final bool isRequired;
   final double? height;
   final TextStyle? style;
+  final Color? fillColor;
   const AppTextFormField({
     required this.label,
     required this.controller,
@@ -21,6 +22,7 @@ class AppTextFormField extends StatelessWidget {
     this.height,
     this.isRequired = false,
     this.style,
+    this.fillColor,
     Key? key,
   }) : super(key: key);
 
@@ -63,7 +65,7 @@ class AppTextFormField extends StatelessWidget {
               decoration: InputDecoration(
                   hintText: hint,
                   border: InputBorder.none,
-                  fillColor: AppColors.cGreyConcentric.withOpacity(.30),
+                  fillColor: fillColor ?? const Color(0xfff5f5f5),
                   filled: true),
             ),
           )

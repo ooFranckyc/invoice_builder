@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
       slideWidth: MediaQuery.of(context).size.width * 0.65,
       borderRadius: 24.0,
       showShadow: true,
-      drawerShadowsBackgroundColor: Colors.white60,
+      drawerShadowsBackgroundColor: Colors.grey.shade50,
       menuBackgroundColor: AppColors.cPrimary,
     );
   }
@@ -124,13 +124,16 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     AuthentificationProvider authProvider = Provider.of<AuthentificationProvider>(context);
+
     return Scaffold(
       backgroundColor: AppColors.cPrimary,
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle(
             statusBarBrightness: Brightness.light,
             statusBarIconBrightness: Brightness.light,
-            statusBarColor: AppColors.cPrimary),
+            statusBarColor: AppColors.cPrimary,
+            systemNavigationBarColor: AppColors.cPrimary,
+            systemNavigationBarIconBrightness: Brightness.light),
         backgroundColor: AppColors.cPrimary,
         elevation: 0.0,
       ),
@@ -202,6 +205,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       currentIndex = 0; // A 0 parce que l'on revient toujours en page principal
                     });
                     ZoomDrawer.of(context)!.toggle();
+                    Get.toNamed(AppLinks.contactScreen);
                   },
                   child: optionMenuTitle(
                       title: AppStrings.helpCenterHomePageOption,
@@ -227,6 +231,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           GestureDetector(
                             onTap: () async {
                               await authProvider.handleSignOut();
+                              Get.offNamed(AppLinks.loginScreen);
                             },
                             child: AppText(
                               text: 'Sign Out',
@@ -278,16 +283,6 @@ class _MenuScreenState extends State<MenuScreen> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          if (widget.connectionStatus == ConnectionState.active)
-            Container(
-              width: 80.0,
-              height: 80.0,
-              decoration: BoxDecoration(
-                  color: Colors.blue,
-                  image: DecorationImage(image: NetworkImage(profile), fit: BoxFit.cover),
-                  border: Border.all(width: 2, color: Colors.white),
-                  shape: BoxShape.circle),
-            ),
           const SizedBox(width: 10.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

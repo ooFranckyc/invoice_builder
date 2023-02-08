@@ -11,7 +11,6 @@ import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
 import 'package:invoice_builder/shared/widgets/invoice_b_appbar.dart';
-import 'package:invoice_builder/shared/widgets/snackbar.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:invoice_builder/shared/widgets/text_field.dart';
 import 'package:provider/provider.dart';
@@ -43,10 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
         break;
       case AuthentificationStatus.authentificated:
-        messageWithSnackbar(
-            context: context,
-            message: AppStrings.authentificationMessage[2],
-            color: Colors.blue.shade600);
         break;
       default:
     }
@@ -54,6 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: invoiceBuildAppBar(
           elevation: 0.0,
           title: "",
+          backgroundColor: AppColors.dColor,
           actions: [
             GestureDetector(
                 onTap: () {
@@ -65,9 +61,9 @@ class _LoginScreenState extends State<LoginScreen> {
           sysUiBar: SystemUiOverlayStyle(
               statusBarBrightness: Brightness.dark,
               statusBarIconBrightness: Brightness.dark,
-              statusBarColor: AppColors.cWhite,
-              systemNavigationBarColor: AppColors.cWhite)),
-      //backgroundColor: AppColors.cWhite,
+              statusBarColor: AppColors.dColor,
+              systemNavigationBarColor: AppColors.dColor)),
+      backgroundColor: AppColors.dColor,
       body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -91,11 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: AppTextStyle.textStyle6(),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    AppStrings.textDescLoginScreen,
-                    style: AppTextStyle.textStyle5(color: AppColors.cPrimary.withOpacity(.70)),
-                    textAlign: TextAlign.start,
-                  ),
                   SizedBox(height: AutoDimensions.calcH(15)),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -125,7 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             alignment: Alignment.center,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                color: AppColors.cPrimary, borderRadius: BorderRadius.circular(12)),
+                                color: AppColors.cPrimary.withOpacity(.80),
+                                borderRadius: BorderRadius.circular(12)),
                             child: AppText(
                               text: AppStrings.textLoginBtn,
                               style: AppTextStyle.textStyle3(
@@ -158,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: AppColors.cWhite,
+                          color: AppColors.cPrimary.withOpacity(.10),
                           //border: Border.all(width: .5, color: AppColors.cPrimary),
                           borderRadius: BorderRadius.circular(12)),
                       child: Row(
@@ -188,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.center,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                          color: AppColors.cWhite,
+                          color: AppColors.cPrimary.withOpacity(.10),
                           //border: Border.all(width: .5, color: AppColors.cPrimary),
                           borderRadius: BorderRadius.circular(12)),
                       child: Row(

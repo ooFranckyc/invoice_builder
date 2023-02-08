@@ -11,10 +11,11 @@ AppBar invoiceBuildAppBar(
     required List<Widget> actions,
     required bool showBackButton,
     double? elevation,
+    Color? backgroundColor,
     SystemUiOverlayStyle? sysUiBar}) {
   return AppBar(
     elevation: elevation ?? .5,
-    backgroundColor: AppColors.cWhite,
+    backgroundColor: backgroundColor ?? AppColors.cWhite,
     automaticallyImplyLeading: false,
     leading: showBackButton
         ? Bounce(
@@ -24,7 +25,7 @@ AppBar invoiceBuildAppBar(
             },
             child: Container(
                 alignment: Alignment.center,
-                decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
+                // decoration: BoxDecoration(color: AppColors.cGreyLow, shape: BoxShape.circle),
                 margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 padding: const EdgeInsets.all(5.0),
                 child: Icon(Icons.arrow_back, color: AppColors.cPrimary)),

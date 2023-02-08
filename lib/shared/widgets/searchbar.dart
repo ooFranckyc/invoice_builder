@@ -28,7 +28,7 @@ class _InvoiceSearchBarState extends State<InvoiceSearchBar> {
             child: Container(
                 padding: const EdgeInsets.all(5.0),
                 decoration: BoxDecoration(
-                    color: AppColors.cGreyLow, borderRadius: BorderRadius.circular(12.0)),
+                    color: AppColors.cWhite, borderRadius: BorderRadius.circular(12.0)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

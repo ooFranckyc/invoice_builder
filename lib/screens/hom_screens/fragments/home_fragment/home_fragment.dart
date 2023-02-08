@@ -9,6 +9,7 @@ import 'package:invoice_builder/shared/colors.dart';
 import 'package:invoice_builder/shared/firestore_key.dart';
 import 'package:invoice_builder/shared/strings.dart';
 import 'package:invoice_builder/shared/style.dart';
+import 'package:invoice_builder/shared/time.dart';
 import 'package:invoice_builder/shared/widgets/searchbar.dart';
 import 'package:invoice_builder/shared/widgets/text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +23,6 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomeFragmentState extends State<HomeFragment> {
-  final defaultDuration = const Duration(milliseconds: 180);
   final preferences = SharedPreferences.getInstance();
   String username = AppStrings.defaultUsername, profile = AppStrings.defaultProfileImage;
   final Stream<QuerySnapshot> popularInvoiceStream =
@@ -44,14 +44,17 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      physics: const BouncingScrollPhysics(),
-      children: [
-        _headerUserInformation(),
-        const InvoiceSearchBar(),
-        _tipsForFastBuildInvoiceStepByStep(),
-        _usingTemplateInvoice()
-      ],
+    return Scaffold(
+      backgroundColor: AppColors.cWhite,
+      body: ListView(
+        physics: const BouncingScrollPhysics(),
+        children: [
+          _headerUserInformation(),
+          const InvoiceSearchBar(),
+          _tipsForFastBuildInvoiceStepByStep(),
+          _usingTemplateInvoice()
+        ],
+      ),
     );
   }
 
@@ -78,7 +81,8 @@ class _HomeFragmentState extends State<HomeFragment> {
     return Stack(
       children: [
         Container(
-          color: AppColors.cGreyLow,
+          decoration:
+              BoxDecoration(color: AppColors.cGreyLow, borderRadius: BorderRadius.circular(12)),
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
           child: Column(
@@ -91,24 +95,24 @@ class _HomeFragmentState extends State<HomeFragment> {
                   style: AppTextStyle.textStyle1(),
                 ),
               ),
-              const SizedBox(height: 8.0),
+              const SizedBox(height: 15.0),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0, bottom: 10),
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll<Color>(AppColors.cPrimary),
-                        elevation: const MaterialStatePropertyAll<double?>(.5),
-                        padding: const MaterialStatePropertyAll<EdgeInsets>(
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 15)),
-                        splashFactory: NoSplash.splashFactory),
+                  padding: const EdgeInsets.only(left: 15.0, bottom: 10),
+                  child: Bounce(
+                    duration: AppTimePlaner.defaultDuration,
                     onPressed: () {
                       Get.toNamed(AppLinks.newInvoiceScreen);
                     },
-                    child: Text(
-                      AppStrings.genInvoiceHomeFragment,
-                      style: AppTextStyle.textStyle3(color: AppColors.cWhite),
-                    )),
-              )
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 13),
+                      decoration: BoxDecoration(
+                          color: AppColors.cPrimary, borderRadius: BorderRadius.circular(50)),
+                      child: AppText(
+                        text: 'Generate New',
+                        style: AppTextStyle.textStyle3(color: AppColors.cWhite),
+                      ),
+                    ),
+                  ))
             ],
           ),
         )
@@ -129,6 +133,7 @@ class _HomeFragmentState extends State<HomeFragment> {
     );
   }
 
+  final popularInvoiceLength = 6;
   Widget _usingPopularInvoice() {
     return Column(
       children: [
@@ -136,7 +141,7 @@ class _HomeFragmentState extends State<HomeFragment> {
             title: AppStrings.popularTempHomeFragment,
             action: AppStrings.viewAllHomeFragment,
             onPress: () => Get.toNamed(AppLinks.tempScreen)),
-        const SizedBox(height: 10.0),
+        const SizedBox(height: 15.0),
         /*
           A ce niveau, lorsque le service de reception & de modelisation de facture venant 
           de firebase sera operationel, l'utilisation d'un ListView.builder(args), ne sera pas utilse,
@@ -179,28 +184,33 @@ class _HomeFragmentState extends State<HomeFragment> {
                     ],
                   );
                 }
+
                 return ListView(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   children: snapshot.data!.docs
                       .map((DocumentSnapshot document) {
                         Map<String, dynamic> invoice = document.data()! as Map<String, dynamic>;
-                        return OpenContainer(
-                          closedBuilder: (BuildContext context, void Function() action) {
-                            return InvoiceCard(
-                                title: invoice['name'], heroPreview: invoice['image']);
-                          },
-                          openBuilder:
-                              (BuildContext context, void Function({Object? returnValue}) action) {
-                            return TemplateScreenDetails(
-                              templateName: invoice['name'],
-                              templateImage: invoice['image'],
-                              templateDomain: invoice['domain'],
-                              templateDesc: invoice['desc'],
-                              templateLike: int.parse(invoice['like']),
-                            );
-                          },
-                        );
+                        for (int i = 0; i <= popularInvoiceLength;) {
+                          return OpenContainer(
+                            openColor: AppColors.cWhite,
+                            closedColor: AppColors.cWhite,
+                            closedBuilder: (BuildContext context, void Function() action) {
+                              return InvoiceCard(
+                                  title: invoice['name'], heroPreview: invoice['image']);
+                            },
+                            openBuilder: (BuildContext context,
+                                void Function({Object? returnValue}) action) {
+                              return TemplateScreenDetails(
+                                templateName: invoice['name'],
+                                templateImage: invoice['image'],
+                                templateDomain: invoice['domain'],
+                                templateDesc: invoice['desc'],
+                                templateLike: int.parse(invoice['like']),
+                              );
+                            },
+                          );
+                        }
                       })
                       .toList()
                       .cast(),
@@ -219,9 +229,12 @@ class _HomeFragmentState extends State<HomeFragment> {
             action: AppStrings.viewAllHomeFragment,
             onPress: () => Get.toNamed(AppLinks.lastTempScreen)),
         const SizedBox(
-          height: 30.0,
+          height: 50.0,
         ),
-        noTemplateYet()
+        noTemplateYet(),
+        const SizedBox(
+          height: 10.0,
+        ),
       ],
     );
   }
@@ -256,10 +269,10 @@ class _HomeFragmentState extends State<HomeFragment> {
       children: [
         Text(
           title,
-          style: AppTextStyle.textStyle4(),
+          style: AppTextStyle.textStyle3(),
         ),
         Bounce(
-          duration: defaultDuration,
+          duration: AppTimePlaner.defaultDuration,
           onPressed: onPress,
           child: Text(
             action,
