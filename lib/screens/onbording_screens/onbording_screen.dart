@@ -31,7 +31,8 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
       ),
       backgroundColor: AppColors.cWhite,
       body: OnBoardingSlider(
-        headerBackgroundColor: AppColors.dColor,
+        headerBackgroundColor: AppColors.cWhite,
+        pageBackgroundColor: AppColors.cWhite,
         finishButtonText: AppStrings.textRegisterOnbordingScreen,
         onFinish: () {
           Get.offAllNamed(AppLinks.registerScreen);
